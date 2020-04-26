@@ -1,4 +1,5 @@
 package com.genericsl.view.ui.activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,10 +35,8 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     internal  lateinit var loginPresenter: ILoginPresenter
 
 
+    //progressBar
     private var progressBar: ProgressBar? = null
-    private var i = 0
-    private val handler = Handler()
-    private var txtView: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,11 +74,18 @@ class LoginActivity : AppCompatActivity(), ILoginView {
                 if (auth == null)
                 {
                     progressBar!!.visibility = View.INVISIBLE
-                    Toast.makeText(this@LoginActivity,"Usuario y contraseña incorrectos",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginActivity,""+response.message(),Toast.LENGTH_LONG).show()
 
                 }
                 else{
                     //Toast.makeText(this@LoginActivity,""+auth?.access_token,Toast.LENGTH_LONG).show()
+                    val sharedPref = this@LoginActivity.getSharedPreferences("credenciales",Context.MODE_PRIVATE)
+                    val editor = sharedPref.edit()
+                    editor.putString("token", auth.access_token)
+                    editor.putString("email", email.text.toString())
+                    editor.apply()
+
+
                     val intento1 = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intento1)
                     progressBar!!.visibility = View.INVISIBLE
