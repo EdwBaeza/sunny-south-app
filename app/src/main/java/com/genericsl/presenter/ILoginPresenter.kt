@@ -1,7 +1,9 @@
 package com.genericsl.presenter
 
+import com.genericsl.interactor.models.LoginSuccess
+
 interface ILoginPresenter {
 
-    fun onLogin(email:String, password:String)
+    fun onLogin(loginSuccess: LoginSuccess)
 
 }

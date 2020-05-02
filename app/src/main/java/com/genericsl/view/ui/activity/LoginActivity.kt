@@ -3,24 +3,17 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.isVisible
 import com.genericsl.R
-import com.genericsl.model.Login
-import com.genericsl.model.clientRest.ApiService
+import com.genericsl.interactor.clientRest.RetrofitClient
 import com.genericsl.presenter.ILoginPresenter
 import com.genericsl.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
 
 class LoginActivity : AppCompatActivity(), ILoginView {
 
@@ -49,32 +42,36 @@ class LoginActivity : AppCompatActivity(), ILoginView {
 
         //event
         email_sign_in_button.setOnClickListener {
-            // loginPresenter.onLogin(email.text.toString(), password.text.toString())
+            //loginPresenter.onLogin(email.text.toString(), password.text.toString())
 
             progressBar!!.visibility = View.VISIBLE
-            peticionAPi()
+            //peticionAPi()
 
 
         }
 
     }
 
-    fun peticionAPi(){
-        val retrofit:Retrofit = Retrofit.Builder()
-            .baseUrl("https://g2y45q7yh6.execute-api.us-west-2.amazonaws.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+    /*fun peticionAPi(){
 
-        val service = retrofit.create<ApiService>(ApiService::class.java)
+        val retrofit = RetrofitClient().getClient("https://ec2-54-187-153-186.us-west-2.compute.amazonaws.com/")
 
-        service.goLogin(Login(email.text.toString(), password.text.toString(),"1")).enqueue(object : Callback<Login>{
+        val service = retrofit?.create<ApiService>(ApiService::class.java)
+
+        service?.goLogin(
+            Login(
+                email.text.toString(),
+                password.text.toString(),
+                "1"
+            )
+        )?.enqueue(object : Callback<Login>{
             override fun onResponse(call: Call<Login>, response: Response<Login>) {
                 var auth : Login? = response.body()
 
                 if (auth == null)
                 {
                     progressBar!!.visibility = View.INVISIBLE
-                    Toast.makeText(this@LoginActivity,""+response.message(),Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginActivity,""+response.code(),Toast.LENGTH_LONG).show()
 
                 }
                 else{
@@ -100,6 +97,6 @@ class LoginActivity : AppCompatActivity(), ILoginView {
             }
         })
 
-    }
+    }*/
 
 }
