@@ -32,12 +32,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val sharedPref = this.getSharedPreferences("credenciales",Context.MODE_PRIVATE)
-        val email:String? = sharedPref.getString("email", "nada")
+        val email:String? = sharedPref.getString("email", "S/E")
 
         val inflater:LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view:View = inflater.inflate(R.layout.nav_header_main, null)
         val emailU:TextView = view.findViewById(R.id.email_user) as TextView
         emailU.text = "goku"
+
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->

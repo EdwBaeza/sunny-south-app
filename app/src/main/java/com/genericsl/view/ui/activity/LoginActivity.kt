@@ -22,48 +22,56 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity(), ILoginView {
 
-    override fun onLoginSuccess(message: String) {
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+    override fun onLoginSuccess(login: LoginSuccess?) {
+        progressBar!!.visibility = View.INVISIBLE
+        Toast.makeText(this,login?.access_token,Toast.LENGTH_LONG).show()
+        startHome()
     }
 
     override fun onLoginError(message: String) {
+        progressBar!!.visibility = View.INVISIBLE
         Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 
-    internal  lateinit var loginPresenter: ILoginPresenter
+    override fun startHome() {
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+    }
 
-
+    lateinit var presenter: ILoginPresenter
     //progressBar
     private var progressBar: ProgressBar? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
+        setContentView(R.layout.activity_login)
         progressBar = findViewById<ProgressBar>(R.id.progress_Bar) as ProgressBar
 
         //init
-        loginPresenter = LoginPresenter(this)
+        presenter = LoginPresenter(this)
 
         //event
         email_sign_in_button.setOnClickListener {
             //loginPresenter.onLogin(email.text.toString(), password.text.toString())
 
-            //progressBar!!.visibility = View.VISIBLE
-
-
+            progressBar!!.visibility = View.VISIBLE
+            val email = email.text.toString()
+            val password = password.text.toString()
+            val login = Login(email, password)
+            presenter.onLogin(login)
             //LoginServiceImp().getLogin(email.text.toString(),password.text.toString())
             //Toast.makeText(this@LoginActivity,"mensage: "+ mensa,Toast.LENGTH_LONG).show()
 
-            peticionAPi(email.text.toString(),password.text.toString())
+            //peticionAPi(email.text.toString(),password.text.toString())
 
 
         }
 
     }
 
-    fun peticionAPi(email:String, password:String){
+/*    fun peticionAPi(email:String, password:String){
 
         val retrofit = RetrofitClient().getClient("https://ec2-54-187-153-186.us-west-2.compute.amazonaws.com/")
 
@@ -74,7 +82,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
                 email,
                 password
             )
-        )?.enqueue(object : Callback<Login>{
+        )?.enqueue(object : Callback<LoginSuccess>{
             override fun onResponse(call: Call<Login>, response: Response<Login>) {
                 var auth : Login? = response.body()
 
@@ -86,11 +94,11 @@ class LoginActivity : AppCompatActivity(), ILoginView {
                 }
                 else{
                     //Toast.makeText(this@LoginActivity,""+auth?.access_token,Toast.LENGTH_LONG).show()
-                    /*val sharedPref = this@LoginActivity.getSharedPreferences("credenciales",Context.MODE_PRIVATE)
+                    *//*val sharedPref = this@LoginActivity.getSharedPreferences("credenciales",Context.MODE_PRIVATE)
                     val editor = sharedPref.edit()
                     editor.putString("token", auth.access_token)
                     editor.putString("email", email.text.toString())
-                    editor.apply()*/
+                    editor.apply()*//*
 
                     val intento1 = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intento1)
@@ -106,6 +114,6 @@ class LoginActivity : AppCompatActivity(), ILoginView {
             }
         })
 
-    }
+    }*/
 
 }
