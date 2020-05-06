@@ -10,17 +10,12 @@ class LoginPresenter(val view: ILoginView):ILoginPresenter {
     val interactor: LoginServiceImp = LoginServiceImp(this)
 
     override fun onLogin(login: Login) {
-        interactor.getLogin(login)
-        //val login = Login(email, password)
+        val loginUser = Login(login.email, login.password)
 
-        /*val loginCode = login.isDataValid()
-
-        if(loginCode == 0)
-            iLoginView.onLoginError("El email no debe ser vacio")
-        else if(loginCode == 1)
-            iLoginView.onLoginError("Dirección email incorrecto")
+        if(loginUser.dataIsValid() == 1)
+            view.onLoginError("Los datos ingresados no son válidos")
         else
-            iLoginView.onLoginSuccess("Inicio de sesión exitoso")*/
+            interactor.getLogin(login)
     }
 
     override fun onLoginSuccess(loginSuccess: LoginSuccess?){

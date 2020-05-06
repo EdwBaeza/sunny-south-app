@@ -12,7 +12,6 @@ import retrofit2.Response
 
 class LoginServiceImp(val presenter: ILoginPresenter) {
 
-
     fun getLogin(login: Login){
 
         val retrofit = RetrofitClient().getClient(Config.BASE_URL)
@@ -32,12 +31,9 @@ class LoginServiceImp(val presenter: ILoginPresenter) {
                     presenter.onLoginSuccess(loginSuccess)
                 }
             }
-
         })
-
     }
 }
-
 
 //INTERACTOR -> PRESENTER -> VIEW
 //INTERACTOR <- PRESENTER <- VIEW

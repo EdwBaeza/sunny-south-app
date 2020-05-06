@@ -31,18 +31,9 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val sharedPref = this.getSharedPreferences("credenciales",Context.MODE_PRIVATE)
-        val email:String? = sharedPref.getString("email", "S/E")
-
-        val inflater:LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view:View = inflater.inflate(R.layout.nav_header_main, null)
-        val emailU:TextView = view.findViewById(R.id.email_user) as TextView
-        emailU.text = "goku"
-
-
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action "+ email.toString() + emailU.text.toString() , Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Replace with your own action " , Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)

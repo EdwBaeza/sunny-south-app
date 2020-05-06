@@ -9,3 +9,9 @@ data class User (
     var password: String,
     var password_confirmation: String
 )
+
+/*  validar password >= 6  que esta en el modelo Login
+    validar phone 10 digitos
+    como validar el email esta en el modelo Login
+    ningun campo debe ser vacio
+*/

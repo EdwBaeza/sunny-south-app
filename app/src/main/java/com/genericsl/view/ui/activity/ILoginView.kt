@@ -7,5 +7,6 @@ interface ILoginView {
     fun onLoginSuccess(loginSuccess: LoginSuccess?)
     fun onLoginError(message:String)
     fun startHome()
+    fun saveDataLogin(login: LoginSuccess?)
 
 }
