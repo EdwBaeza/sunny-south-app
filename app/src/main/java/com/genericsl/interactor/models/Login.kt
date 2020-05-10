@@ -8,26 +8,17 @@ data class Login(
     var password: String
 ){
 
-    fun dataIsValid(): Int {
-        if ((emailIsValid(email) == 1) && (passwordIsValid(password) == 1))
-            return 0
-        else
-            return 1
+    fun dataIsValid(): Boolean {
+        return (emailIsValid(email)) && (passwordIsValid(password))
     }
 
-    fun emailIsValid(email: String): Int {
-        if (TextUtils.isEmpty(email))
-            return 0
-        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-            return 0
-        else
-            return 1
+    private fun emailIsValid(email: String): Boolean {
+        return if (TextUtils.isEmpty(email))
+            false
+        else Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    fun passwordIsValid(password: String): Int {
-        if (password.length >= 6)
-            return 1
-        else
-            return 0
+    private fun passwordIsValid(password: String): Boolean {
+        return password.length >= 6
     }
 }

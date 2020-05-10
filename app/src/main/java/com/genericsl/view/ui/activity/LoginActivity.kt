@@ -22,10 +22,10 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         setContentView(R.layout.activity_login)
         progressBar = findViewById<ProgressBar>(R.id.progress_Bar) as ProgressBar
         presenter = LoginPresenter(this)
-
 
         email_sign_in_button.setOnClickListener {
 
@@ -47,8 +47,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
 
     override fun onLoginError(message: String) {
         progressBar!!.visibility = View.INVISIBLE
-        val errorUser: String = getString(R.string.error_data_user)
-        Toast.makeText(this,errorUser,Toast.LENGTH_LONG).show()
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 
     override fun startHome() {

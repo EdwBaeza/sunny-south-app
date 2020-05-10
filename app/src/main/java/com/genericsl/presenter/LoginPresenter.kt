@@ -1,5 +1,6 @@
 package com.genericsl.presenter
 
+import com.genericsl.R
 import com.genericsl.interactor.models.Login
 import com.genericsl.view.ui.activity.ILoginView
 import com.genericsl.interactor.clientRest.login.LoginServiceImp
@@ -10,12 +11,11 @@ class LoginPresenter(val view: ILoginView):ILoginPresenter {
     val interactor: LoginServiceImp = LoginServiceImp(this)
 
     override fun onLogin(login: Login) {
-        val loginUser = Login(login.email, login.password)
 
-        if(loginUser.dataIsValid() == 1)
-            view.onLoginError("Los datos ingresados no son válidos")
+        if(login.dataIsValid())
+            view.onLoginError((R.string.error_data_user).toString())
         else
-            interactor.getLogin(login)
+            interactor.onLogin(login)
     }
 
     override fun onLoginSuccess(loginSuccess: LoginSuccess?){
