@@ -24,7 +24,7 @@ class LoginServiceImp(val presenter: ILoginPresenter) {
 
             override fun onResponse(call: Call<LoginSuccess>, response: Response<LoginSuccess>) {
 
-                if(response.code() != 201){
+                if(response.code() != 200){
                     presenter.onLoginError((R.string.error_data_user).toString())
                 }else{
                     val loginSuccess: LoginSuccess? = response.body()

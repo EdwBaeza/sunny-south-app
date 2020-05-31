@@ -12,9 +12,9 @@ class LoginPresenter(val view: ILoginView):ILoginPresenter {
 
     override fun onLogin(login: Login) {
 
-        if(login.dataIsValid())
-            view.onLoginError((R.string.error_data_user).toString())
-        else
+        //if(login.dataIsValid())
+          //  view.onLoginError((R.string.error_data_user).toString())
+        //else
             interactor.onLogin(login)
     }
 

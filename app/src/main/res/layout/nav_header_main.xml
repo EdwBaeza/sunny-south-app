@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
     <data>
         <variable
             name="user"
-            type="com.genericsl.interactor.models.LoginSuccess"
-            />
+            type="com.genericsl.interactor.models.Login"/>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:text="hola"/>
+            android:text="@{user.email}"/>
 
     </LinearLayout>
 </layout>
