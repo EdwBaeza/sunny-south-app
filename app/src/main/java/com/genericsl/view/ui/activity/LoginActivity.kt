@@ -1,5 +1,4 @@
 package com.genericsl.view.ui.activity
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,18 +6,11 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.genericsl.R
-import com.genericsl.interactor.clientRest.RetrofitClient
-import com.genericsl.interactor.clientRest.login.LoginService
-import com.genericsl.interactor.clientRest.login.LoginServiceImp
 import com.genericsl.interactor.models.Login
 import com.genericsl.interactor.models.LoginSuccess
-import com.genericsl.interactor.models.User
 import com.genericsl.presenter.ILoginPresenter
 import com.genericsl.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginActivity : AppCompatActivity(), ILoginView {
 
@@ -52,7 +44,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         //init
         presenter = LoginPresenter(this)
 
-        //event
+        //events
         email_sign_in_button.setOnClickListener {
             //loginPresenter.onLogin(email.text.toString(), password.text.toString())
 
@@ -65,9 +57,22 @@ class LoginActivity : AppCompatActivity(), ILoginView {
             //Toast.makeText(this@LoginActivity,"mensage: "+ mensa,Toast.LENGTH_LONG).show()
 
             //peticionAPi(email.text.toString(),password.text.toString())
-
-
         }
+
+        signup_action.setOnClickListener{
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        //Toast.makeText(this,"Estoy en el loginActivity",Toast.LENGTH_LONG).show()
+        finish();
+    }
+
+    fun goCreateAccount(view: View) {
 
     }
 
