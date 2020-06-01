@@ -22,6 +22,12 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val sharedPref = this.getSharedPreferences("user_credentials",Context.MODE_PRIVATE)
+        val getToken:String? = sharedPref.getString("token", null)
+
+        if (getToken !== null) {
+            startHome()
+        }
 
         setContentView(R.layout.activity_login)
         progressBar = findViewById<ProgressBar>(R.id.progress_Bar) as ProgressBar
@@ -33,7 +39,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
             val email = email.text.toString()
             val password = password.text.toString()
             val login = Login(email, password)
-            presenter.onLogin(login)
+            presenter.onLogin(login, this)
 
         }
     }
@@ -41,7 +47,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     override fun onLoginSuccess(login: LoginSuccess?) {
         progressBar!!.visibility = View.INVISIBLE
         Toast.makeText(this,login?.access_token,Toast.LENGTH_LONG).show()
-        saveDataLogin(login)
+        presenter.saveDataLogin(login,this)
         startHome()
     }
 
@@ -53,13 +59,6 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     override fun startHome() {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
-    }
-
-    override fun saveDataLogin(login: LoginSuccess?) {
-        val sharedPref = this@LoginActivity.getSharedPreferences("user_credentials",Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putString("token", login?.access_token)
-        editor.putString("email", login?.user?.email)
-        editor.apply()
+        finish()
     }
 }

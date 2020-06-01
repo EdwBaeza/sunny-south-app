@@ -1,6 +1,5 @@
 package com.genericsl.view.ui.activity
 
-import android.content.Context
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -14,11 +13,7 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import android.widget.TextView
 import com.genericsl.R
-import android.view.LayoutInflater
-import android.view.View
-
 
 class MainActivity : AppCompatActivity() {
 

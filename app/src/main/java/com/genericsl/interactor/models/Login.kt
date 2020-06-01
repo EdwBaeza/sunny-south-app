@@ -9,14 +9,14 @@ data class Login(
 ){
 
     fun dataIsValid(): Boolean {
-        return (emailIsValid(email)) && (passwordIsValid(password))
+        return (!emailIsValid(email)) || (!passwordIsValid(password))
     }
 
     private fun emailIsValid(email: String): Boolean {
-        return if (TextUtils.isEmpty(email))
-            false
-        else Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
+
+    //TextUtils.isEmpty(email))
 
     private fun passwordIsValid(password: String): Boolean {
         return password.length >= 6

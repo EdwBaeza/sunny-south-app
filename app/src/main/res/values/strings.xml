@@ -36,5 +36,6 @@
 
     <string name="error_data_user">Los datos ingresados no son válidos</string>
     <string name="error_in_login">Error en el login</string>
+    <string name="data_invalid">Datos Inválidos</string>
 
 </resources>
