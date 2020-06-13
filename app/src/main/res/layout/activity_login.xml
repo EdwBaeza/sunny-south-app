@@ -23,12 +23,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:src="@drawable/generic"
                 android:layout_marginVertical="35dp"
                 />
+
+            <ProgressBar
+                android:id="@+id/progress_Bar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/account1"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="73dp"
+                android:layout_marginLeft="77dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="77dp"
+                android:layout_marginRight="77dp"
+                android:indeterminate="true"
+                android:max="100"
+                android:minWidth="200dp"
+                android:minHeight="50dp"
+                android:progress="0"
+                android:visibility="invisible" />
 
             <AutoCompleteTextView
                 android:id="@+id/email"
@@ -71,6 +94,8 @@
                 android:gravity="center"
                 android:layout_marginVertical="20dp">
 
+
+
                 <TextView
                     android:id="@+id/account1"
                     android:layout_width="wrap_content"
@@ -95,12 +120,13 @@
         </LinearLayout>
     </ScrollView>
 
-    <ProgressBar
+    <!--<ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:visibility="gone" />
+        android:visibility="gone" />-->
+
 
 </LinearLayout>
