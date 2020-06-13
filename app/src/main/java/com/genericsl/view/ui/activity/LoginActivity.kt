@@ -10,6 +10,7 @@ import com.genericsl.interactor.models.Login
 import com.genericsl.interactor.models.LoginSuccess
 import com.genericsl.presenter.ILoginPresenter
 import com.genericsl.presenter.LoginPresenter
+import com.genericsl.view.ui.activity.Register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), ILoginView {
@@ -62,6 +63,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         signup_action.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
     }
@@ -69,7 +71,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     override fun onBackPressed() {
         //super.onBackPressed()
         //Toast.makeText(this,"Estoy en el loginActivity",Toast.LENGTH_LONG).show()
-        finish();
+        //finish();
     }
 
     fun goCreateAccount(view: View) {

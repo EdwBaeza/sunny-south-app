@@ -8,6 +8,6 @@ import retrofit2.Call
 
 interface RegisterService {
 
-    @POST("cual/era/la/ruta?")
+    @POST("users/signup/")
     fun goRegister(@Body user:User): Call<RegisterSuccess>
 }

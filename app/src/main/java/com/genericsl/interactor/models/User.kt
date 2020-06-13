@@ -1,5 +1,7 @@
 package com.genericsl.interactor.models
 
+import java.lang.NumberFormatException
+
 data class User (
     var username: String,
     var first_name: String,
@@ -26,10 +28,33 @@ data class User (
         return true
     }
 
+    fun phoneNumberValidation():Boolean
+    {
+        if (phone_number.length.equals(10))
+            return true
+        return false
+    }
+
     fun passwordsDataIsValid():Boolean
     {
         if (password.isNullOrBlank() || password_confirmation.isNullOrBlank())
             return false
+        else if (password.length<8)
+            return false
+        return true
+    }
+
+    fun passwordIsOnlyNumeric():Boolean
+    {
+        try
+        {
+            Integer.parseInt(password)
+        }
+        catch(e:NumberFormatException)
+        {
+            return false
+        }
+
         return true
     }
 
