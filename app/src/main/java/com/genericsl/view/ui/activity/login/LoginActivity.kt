@@ -1,4 +1,4 @@
-package com.genericsl.view.ui.activity
+package com.genericsl.view.ui.activity.login
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,9 @@ import android.widget.Toast
 import com.genericsl.R
 import com.genericsl.interactor.models.Login
 import com.genericsl.interactor.models.LoginSuccess
-import com.genericsl.presenter.ILoginPresenter
-import com.genericsl.presenter.LoginPresenter
+import com.genericsl.presenter.login.ILoginPresenter
+import com.genericsl.presenter.login.LoginPresenter
+import com.genericsl.view.ui.activity.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -38,6 +39,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
             progressBar!!.visibility = View.VISIBLE
             val email = email.text.toString()
             val password = password.text.toString()
+
             val login = Login(email, password)
             presenter.onLogin(login, this)
 

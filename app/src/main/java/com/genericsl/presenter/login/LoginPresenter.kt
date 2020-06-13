@@ -1,13 +1,13 @@
-package com.genericsl.presenter
+package com.genericsl.presenter.login
 
 import android.content.Context
 import com.genericsl.R
 import com.genericsl.interactor.models.Login
-import com.genericsl.view.ui.activity.ILoginView
+import com.genericsl.view.ui.activity.login.ILoginView
 import com.genericsl.interactor.clientRest.login.LoginServiceImp
 import com.genericsl.interactor.models.LoginSuccess
 
-class LoginPresenter(val view: ILoginView):ILoginPresenter {
+class LoginPresenter(val view: ILoginView): ILoginPresenter {
 
     val interactor: LoginServiceImp = LoginServiceImp(this)
 

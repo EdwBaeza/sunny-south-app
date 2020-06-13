@@ -1,4 +1,4 @@
-package com.genericsl.view.ui.activity
+package com.genericsl.view.ui.activity.login
 
 import com.genericsl.interactor.models.LoginSuccess
 

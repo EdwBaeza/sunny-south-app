@@ -5,7 +5,7 @@ import com.genericsl.config.Config
 import com.genericsl.interactor.clientRest.RetrofitClient
 import com.genericsl.interactor.models.Login
 import com.genericsl.interactor.models.LoginSuccess
-import com.genericsl.presenter.ILoginPresenter
+import com.genericsl.presenter.login.ILoginPresenter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

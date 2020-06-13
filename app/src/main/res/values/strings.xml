@@ -28,7 +28,7 @@
     <string name="nav_header_title">Menu</string>
     <string name="nav_header_subtitle">genericsl@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_logout">Salir</string>
     <string name="dont_have_account">¿No tienes una cuenta?</string>
     <string name="create_account">. Crea una aquí</string>
     <string name="name_register">Nombre</string>
@@ -37,5 +37,6 @@
     <string name="error_data_user">Los datos ingresados no son válidos</string>
     <string name="error_in_login">Error en el login</string>
     <string name="data_invalid">Datos Inválidos</string>
+    <string name="sign_off">Cerraste Sesión</string>
 
 </resources>

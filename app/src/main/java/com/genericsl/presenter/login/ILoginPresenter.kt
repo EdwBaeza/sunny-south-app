@@ -1,4 +1,4 @@
-package com.genericsl.presenter
+package com.genericsl.presenter.login
 
 import android.content.Context
 import com.genericsl.interactor.models.Login
