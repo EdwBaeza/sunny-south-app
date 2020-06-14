@@ -1,4 +1,4 @@
-package com.genericsl.view.ui.activity.Register
+package com.genericsl.view.ui.activity.register
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,9 +11,8 @@ import com.genericsl.interactor.models.RegisterSuccess
 import com.genericsl.interactor.models.User
 import com.genericsl.presenter.IRegisterPresenter
 import com.genericsl.presenter.RegisterPresenter
-import com.genericsl.view.ui.activity.LoginActivity
-import com.genericsl.view.ui.activity.MainActivity
-import com.genericsl.view.ui.fragment.home.HomeFragment
+import com.genericsl.view.ui.activity.login.LoginActivity
+import com.genericsl.view.ui.activity.main.MainActivity
 import com.genericsl.view.ui.fragment.register.CredentialsDataFragment
 import com.genericsl.view.ui.fragment.register.PasswordDataFragment
 import com.genericsl.view.ui.fragment.register.PersonalDataFragment
@@ -44,7 +43,7 @@ class RegisterActivity : AppCompatActivity() ,
 
         val formp2 = findViewById(R.id.go_to_register_form_p2) as? MaterialButton
 
-        var user = User("","","","","","","")
+        var user = User()
 
         //Click Envent 'Siguiente#1'
         formp2?.setOnClickListener{
@@ -77,12 +76,17 @@ class RegisterActivity : AppCompatActivity() ,
             user.email = email.text.toString()
 
             if(user.credentialDataIsValid()){
-                formp4?.visibility = View.VISIBLE
-                formp2?.visibility = View.INVISIBLE
-                formp3?.visibility = View.INVISIBLE
+                if (user.emailIsValid())
+                {
+                    formp4?.visibility = View.VISIBLE
+                    formp2?.visibility = View.INVISIBLE
+                    formp3?.visibility = View.INVISIBLE
 
-                val fragment_password_data = PasswordDataFragment.newInstance()
-                replaceFragment(fragment_password_data,"pwdFragment")
+                    val fragment_password_data = PasswordDataFragment.newInstance()
+                    replaceFragment(fragment_password_data,"pwdFragment")
+                }
+                else
+                    Toast.makeText(this,"the email is not formatted correctly ",Toast.LENGTH_LONG).show()
             }
             else
                 Toast.makeText(this,"The username and email must have a valor",Toast.LENGTH_LONG).show()

@@ -1,4 +1,4 @@
-package com.genericsl.view.ui.activity.Register
+package com.genericsl.view.ui.activity.register
 
 import com.genericsl.interactor.models.RegisterSuccess
 

@@ -3,7 +3,7 @@ package com.genericsl.presenter
 import com.genericsl.interactor.clientRest.Register.RegisterServiceImp
 import com.genericsl.interactor.models.RegisterSuccess
 import com.genericsl.interactor.models.User
-import com.genericsl.view.ui.activity.Register.IRegisterView
+import com.genericsl.view.ui.activity.register.IRegisterView
 
 class RegisterPresenter(val view: IRegisterView):IRegisterPresenter {
 
