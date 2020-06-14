@@ -10,6 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.genericsl.R
+import org.koin.java.KoinJavaComponent.inject
 
 class LoginServiceImp(val presenter: ILoginPresenter) {
 
