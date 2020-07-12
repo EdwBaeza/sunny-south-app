@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Generic SL</string>
 
@@ -33,6 +34,8 @@
     <string name="name_register">Nombre</string>
     <string name="lastname_register">Apellido</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_data_user">Los datos ingresados no son válidos</string>
+    <string name="error_in_login">Error en el login</string>
+    <string name="data_invalid">Datos Inválidos</string>
+
 </resources>

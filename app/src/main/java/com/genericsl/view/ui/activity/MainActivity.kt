@@ -1,6 +1,6 @@
 package com.genericsl.view.ui.activity
 
-import android.content.Context
+import android.app.Application
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -14,35 +14,28 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import android.widget.TextView
 import com.genericsl.R
-import android.view.LayoutInflater
-import android.view.View
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import com.genericsl.appModule
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
+
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val sharedPref = this.getSharedPreferences("credenciales",Context.MODE_PRIVATE)
-        val email:String? = sharedPref.getString("email", "S/E")
-
-        val inflater:LayoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view:View = inflater.inflate(R.layout.nav_header_main, null)
-        val emailU:TextView = view.findViewById(R.id.email_user) as TextView
-        emailU.text = "goku"
-
-
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action "+ email.toString() + emailU.text.toString() , Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Replace with your own action " , Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)

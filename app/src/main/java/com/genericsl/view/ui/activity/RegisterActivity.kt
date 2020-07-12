@@ -42,7 +42,7 @@ class RegisterActivity : AppCompatActivity() , IRegisterView {
 
         val formp2 = findViewById(R.id.go_to_register_form_p2) as? MaterialButton
 
-        var user = User("","","","","","","")
+        var user = User()
 
         //Click Envent 'Siguiente#1'
         formp2?.setOnClickListener{
@@ -51,7 +51,7 @@ class RegisterActivity : AppCompatActivity() , IRegisterView {
             user.last_name = last_name.text.toString()
             user.phone_number = phone_number.text.toString()
 
-            if(user.personalDataIsValid())
+/*            if(user.personalDataIsValid())
             {
                 formp3?.visibility = View.VISIBLE
                 formp2?.visibility = View.INVISIBLE
@@ -60,7 +60,7 @@ class RegisterActivity : AppCompatActivity() , IRegisterView {
                 replaceFragment(fragment_credential_data,"credentialsFragment")
             }
             else
-                Toast.makeText(this,"The first and last name must have a valor",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"The first and last name must have a valor",Toast.LENGTH_LONG).show()*/
         }
 
         //Click Envent 'Siguiente#2'
@@ -68,7 +68,7 @@ class RegisterActivity : AppCompatActivity() , IRegisterView {
 
             user.username = username.text.toString()
             user.email = email.text.toString()
-
+/*
             if(user.credentialDataIsValid()){
                 formp4?.visibility = View.VISIBLE
                 formp2?.visibility = View.INVISIBLE
@@ -78,7 +78,7 @@ class RegisterActivity : AppCompatActivity() , IRegisterView {
                 replaceFragment(fragment_password_data,"pwdFragment")
             }
             else
-                Toast.makeText(this,"The username and email must have a valor",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"The username and email must have a valor",Toast.LENGTH_LONG).show()*/
 
         }
 
@@ -87,7 +87,7 @@ class RegisterActivity : AppCompatActivity() , IRegisterView {
 
             user.password = password_user.text.toString()
             user.password_confirmation = c_password_user.text.toString()
-
+/*
             if(user.passwordsDataIsValid())
             {
                 if(user.thePasswordsAreEquals()){
@@ -104,7 +104,7 @@ class RegisterActivity : AppCompatActivity() , IRegisterView {
             else
                 Toast.makeText(this,"The passwords must have a valor",Toast.LENGTH_LONG).show()
 
-            //Toast.makeText(this,user.toString(),Toast.LENGTH_LONG).show()
+            //Toast.makeText(this,user.toString(),Toast.LENGTH_LONG).show()*/
         }
 
         //Toast.makeText(this,""+ formp4, Toast.LENGTH_LONG).show()
@@ -169,14 +169,14 @@ class RegisterActivity : AppCompatActivity() , IRegisterView {
     }
 
     override fun onRegisterSuccess(registerSuccess: RegisterSuccess?) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun onRegisterError(message: String) {
-        TODO("Not yet implemented")
+       // TODO("Not yet implemented")
     }
 
     override fun startHome() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 }
