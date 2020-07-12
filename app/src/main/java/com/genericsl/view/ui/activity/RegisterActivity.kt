@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_personal_data.*
 
 class RegisterActivity : AppCompatActivity() , IRegisterView {
 
+    //Este objeto nunca lo usa david, no se si lo haya cambiado en su ultima version
     lateinit var presenter: IRegisterPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {

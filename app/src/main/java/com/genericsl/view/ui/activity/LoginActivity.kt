@@ -12,9 +12,12 @@ import com.genericsl.interactor.models.LoginSuccess
 import com.genericsl.presenter.ILoginPresenter
 import com.genericsl.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import org.koin.core.parameter.parametersOf
 
 
-class LoginActivity : AppCompatActivity(), ILoginView {
+class LoginActivity : AppCompatActivity(), ILoginView, KoinComponent {
 
     lateinit var presenter: ILoginPresenter
     private var progressBar: ProgressBar? = null
@@ -31,7 +34,9 @@ class LoginActivity : AppCompatActivity(), ILoginView {
 
         setContentView(R.layout.activity_login)
         progressBar = findViewById<ProgressBar>(R.id.progress_Bar) as ProgressBar
-        presenter = LoginPresenter(this)
+        val loginPresenter:LoginPresenter by inject{parametersOf(this)}
+        //presenter = LoginPresenter(this)
+        presenter = loginPresenter
 
 
         email_sign_in_button.setOnClickListener {

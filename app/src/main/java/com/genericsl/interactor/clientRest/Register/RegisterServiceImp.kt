@@ -27,7 +27,8 @@ class RegisterServiceImp(val presenter:IRegisterPresenter) {
                 if(response.code() != 201){
                     presenter.onRegisterError("Invalid Credentials")
                 }else{
-                    val loginSuccess: RegisterSuccess? = response.body()
+                    val loginSuccess:RegisterSuccess? = response.body()
+                    //val registerSuccess:RegisterSuccess? by inject{ parametersOf( response.body() ) }
                     presenter.onRegisterSuccess(loginSuccess)
                 }
             }
