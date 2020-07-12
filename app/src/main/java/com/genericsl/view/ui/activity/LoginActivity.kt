@@ -34,9 +34,8 @@ class LoginActivity : AppCompatActivity(), ILoginView, KoinComponent {
 
         setContentView(R.layout.activity_login)
         progressBar = findViewById<ProgressBar>(R.id.progress_Bar) as ProgressBar
-        val loginPresenter:LoginPresenter by inject{parametersOf(this)}
-        //presenter = LoginPresenter(this)
-        presenter = loginPresenter
+        presenter = LoginPresenter(this)
+
 
 
         email_sign_in_button.setOnClickListener {
