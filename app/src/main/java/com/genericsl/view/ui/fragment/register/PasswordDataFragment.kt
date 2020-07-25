@@ -53,8 +53,6 @@ class PasswordDataFragment : Fragment() {
         fun newInstance() =
             PasswordDataFragment().apply {
                 arguments = Bundle().apply {
-                    //putString(ARG_PARAM1, param1)
-                    //putString(ARG_PARAM2, param2)
                 }
             }
     }
