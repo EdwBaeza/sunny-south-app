@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/data_info"
+            android:title="data info"
+            android:icon="@drawable/ic_person_black_24dp"
+            />
+
+    <item
+        android:id="@+id/credenciales"
+        android:title="credenciales"
+        android:icon="@drawable/ic_contact_mail_black_24dp"
+        />
+</menu>

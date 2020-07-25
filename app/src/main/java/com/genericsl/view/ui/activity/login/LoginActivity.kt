@@ -12,6 +12,7 @@ import com.genericsl.interactor.models.LoginSuccess
 import com.genericsl.presenter.login.ILoginPresenter
 import com.genericsl.presenter.login.LoginPresenter
 import com.genericsl.view.ui.activity.main.MainActivity
+import com.genericsl.view.ui.activity.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -43,6 +44,12 @@ class LoginActivity : AppCompatActivity(), ILoginView {
             val login = Login(email, password)
             presenter.onLogin(login, this)
 
+        }
+
+        signup_action.setOnClickListener{
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
