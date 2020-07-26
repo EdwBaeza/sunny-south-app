@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:weightSum="1"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorWhite">
 
     <!-- Login progress -->
     <ScrollView
@@ -27,8 +27,9 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
+                android:src="@drawable/generic"
                 android:layout_marginVertical="35dp"
-                android:src="@drawable/generic" />
+                />
 
             <ProgressBar
                 android:id="@+id/progress_Bar"
@@ -61,7 +62,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textAlignment="center"
-                android:textColor="@color/colorWhite"/>
+                android:textColor="@color/colorPrimaryText"/>
 
             <EditText
                 android:id="@+id/password"
@@ -75,15 +76,16 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textAlignment="center"
-                android:textColor="@color/colorWhite"/>
+                android:textColor="@color/colorPrimaryText"/>
 
             <Button
                 android:id="@+id/email_sign_in_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="@string/action_sign_in"
-                />
+                android:background="@color/colorAccent"
+                android:textColor="@color/colorWhite"
+                android:text="@string/action_sign_in"/>
                 <!--android:theme="@style/BtnLogin"-->
 
 
@@ -92,8 +94,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:layout_marginVertical="20dp"
-                >
+                android:layout_marginVertical="20dp">
 
 
 
@@ -102,15 +103,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dont_have_account"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
                 <TextView
-                    android:id="@+id/signup_action"
+                    android:id="@+id/account2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/create_account"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:layout_toRightOf="@id/account1"
@@ -120,14 +121,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <!--<ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />-->
-
 
 </LinearLayout>

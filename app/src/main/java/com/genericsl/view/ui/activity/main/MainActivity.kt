@@ -1,5 +1,6 @@
 package com.genericsl.view.ui.activity.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import com.genericsl.R
 import com.genericsl.presenter.main.IMainPresenter
@@ -63,6 +65,10 @@ class MainActivity : AppCompatActivity(), IMainView {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+        val sharedPref = this.getSharedPreferences("user_credentials", Context.MODE_PRIVATE)
+        val getEmail : String? = sharedPref.getString("email", null)
+        val emailUser : TextView = findViewById(R.id.email_user)
+        emailUser.text =  getEmail
         return true
     }
 
