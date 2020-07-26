@@ -33,10 +33,8 @@
     <string name="create_account">. Crea una aquí</string>
     <string name="name_register">Nombre</string>
     <string name="lastname_register">Apellido</string>
-
     <string name="error_data_user">Los datos ingresados no son válidos</string>
     <string name="error_in_login">Error en el login</string>
     <string name="data_invalid">Datos Inválidos</string>
     <string name="sign_off">Cerraste Sesión</string>
-
 </resources>
