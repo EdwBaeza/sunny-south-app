@@ -6,44 +6,69 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.activity.Register.RegisterActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:padding="30dp"
+        android:src="@drawable/generic" />
+
+    <!--<TextView
+        android:id="@+id/label_registro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
+        android:padding="30dp"
+        android:text="Registro"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="30dp"
+        android:layout_centerInParent="true"
+        />-->
+
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-
-    </FrameLayout>
+        android:layout_below="@+id/imageView2"
+        android:layout_marginTop="30dp"
+        android:padding="30dp"></FrameLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/go_to_register_form_p2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Siguiente"
+        android:layout_centerInParent="true"
         app:strokeColor="@color/colorPrimary"
         app:strokeWidth="1dp"
+        android:layout_marginBottom="20dp"
         >
     </com.google.android.material.button.MaterialButton>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/go_to_register_form_p3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Siguiente"
+        android:layout_centerInParent="true"
         app:strokeColor="@color/colorPrimary"
         app:strokeWidth="1dp"
+        android:layout_marginBottom="20dp"
         >
     </com.google.android.material.button.MaterialButton>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/go_to_register_form_p4"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Enviar"
+        android:layout_centerInParent="true"
         app:strokeColor="@color/colorPrimary"
         app:strokeWidth="1dp"
+        android:layout_marginBottom="20dp"
         >
     </com.google.android.material.button.MaterialButton>
 
