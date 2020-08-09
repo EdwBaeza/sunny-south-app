@@ -13,25 +13,40 @@
         android:padding="30dp"
         android:src="@drawable/generic" />
 
-    <!--<TextView
-        android:id="@+id/label_registro"
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:layout_below="@+id/imageView2"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="10dp"
+    >
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView2"
-        android:padding="30dp"
         android:text="Registro"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="30dp"
-        android:layout_centerInParent="true"
-        />-->
+        android:layout_below="@+id/card"
+        android:padding="30dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        >
+    </com.google.android.material.textview.MaterialTextView>
+
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView2"
         android:layout_marginTop="30dp"
-        android:padding="30dp"></FrameLayout>
+        android:padding="30dp"
+        android:layout_below="@+id/title"
+        android:layout_marginVertical="40dp"
+        ></FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/go_to_register_form_p2"

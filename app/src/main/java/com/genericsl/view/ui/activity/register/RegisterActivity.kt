@@ -48,9 +48,22 @@ class RegisterActivity : AppCompatActivity() ,
         //Click Envent 'Siguiente#1'
         formp2?.setOnClickListener{
             //get the text
-            user.first_name = first_name.text.toString()
-            user.last_name = last_name.text.toString()
-            user.phone_number = phone_number.text.toString()
+            user.first_name = first_name?.editText?.text.toString()
+
+            /*first_name.addOnEditTextAttachedListener {
+                // If any specific changes should be done when the edit text is attached (and
+                // thus when the trailing icon is added to it), set an
+                // OnEditTextAttachedListener.
+
+                // Example: The clear text icon's visibility behavior depends on whether the
+                // EditText has input present. Therefore, an OnEditTextAttachedListener is set
+                // so things like editText.getText() can be called.
+            }
+            */
+            user.last_name = last_name?.editText?.text.toString()
+            user.phone_number = phone_number?.editText?.text.toString()
+
+            //Toast.makeText(this,user.first_name,Toast.LENGTH_LONG).show()
 
             if(user.personalDataIsValid())
             {
@@ -72,8 +85,8 @@ class RegisterActivity : AppCompatActivity() ,
         //Click Envent 'Siguiente#2'
         formp3?.setOnClickListener{
 
-            user.username = username.text.toString()
-            user.email = email.text.toString()
+            user.username = username?.editText?.text.toString()
+            user.email = email?.editText?.text.toString()
 
             if(user.credentialDataIsValid()){
                 if (user.emailIsValid()){
@@ -93,8 +106,8 @@ class RegisterActivity : AppCompatActivity() ,
         //Click Envent 'Envio'
         formp4?.setOnClickListener{
 
-            user.password = password_user.text.toString()
-            user.password_confirmation = c_password_user.text.toString()
+            user.password = password_user?.editText?.text.toString()
+            user.password_confirmation = c_password_user?.editText?.text.toString()
 
             if(user.passwordsDataIsValid()){
                 if(user.thePasswordsAreEquals()){
