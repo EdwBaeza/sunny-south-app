@@ -39,8 +39,8 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         email_sign_in_button.setOnClickListener {
 
             progressBar!!.visibility = View.VISIBLE
-            val email = email.text.toString()
-            val password = password.text.toString()
+            val email = email?.editText?.text.toString()
+            val password = password?.editText?.text.toString()
 
             val login = Login(email, password)
             presenter.onLogin(login, this)
