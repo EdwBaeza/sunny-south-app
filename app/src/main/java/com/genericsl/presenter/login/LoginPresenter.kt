@@ -12,7 +12,7 @@ import org.koin.core.parameter.parametersOf
 
 class LoginPresenter(val view: ILoginView): ILoginPresenter, KoinComponent {
 
-    val interactor:LoginServiceImp by inject{ parametersOf(this)  }
+    val interactor : LoginServiceImp by inject{ parametersOf(this)  }
 
     override fun onLogin(login: Login, context: Context) {
 

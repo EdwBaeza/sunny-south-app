@@ -1,7 +1,7 @@
 package com.genericsl.interactor.clientRest.login
 
 import android.content.Context
-import com.genericsl.config.Config
+import com.genericsl.config.BASE_URL
 import com.genericsl.interactor.clientRest.RetrofitClient
 import com.genericsl.interactor.models.Login
 import com.genericsl.interactor.models.LoginSuccess
@@ -15,7 +15,7 @@ class LoginServiceImp(val presenter: ILoginPresenter) {
 
     fun onLogin(login: Login, context: Context){
 
-        val retrofit = RetrofitClient().getClient(Config.BASE_URL)
+        val retrofit = RetrofitClient().getClient(BASE_URL)
         val service = retrofit?.create<LoginService>(LoginService::class.java)
 
         service?.goLogin(login)?.enqueue(object : Callback<LoginSuccess>{
