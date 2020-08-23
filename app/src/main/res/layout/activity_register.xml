@@ -6,44 +6,84 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.activity.Register.RegisterActivity">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:padding="30dp"
+        android:src="@drawable/generic" />
+
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:layout_below="@+id/imageView2"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="10dp"
+    >
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registro"
+        android:layout_below="@+id/card"
+        android:padding="30dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        >
+    </com.google.android.material.textview.MaterialTextView>
+
+
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_marginTop="30dp"
+        android:padding="30dp"
+        android:layout_below="@+id/title"
+        android:layout_marginVertical="40dp"
+        ></FrameLayout>
 
-    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/go_to_register_form_p2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Siguiente"
+        android:layout_centerInParent="true"
         app:strokeColor="@color/colorPrimary"
         app:strokeWidth="1dp"
+        android:layout_marginBottom="20dp"
         >
     </com.google.android.material.button.MaterialButton>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/go_to_register_form_p3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Siguiente"
+        android:layout_centerInParent="true"
         app:strokeColor="@color/colorPrimary"
         app:strokeWidth="1dp"
+        android:layout_marginBottom="20dp"
         >
     </com.google.android.material.button.MaterialButton>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/go_to_register_form_p4"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Enviar"
+        android:layout_centerInParent="true"
         app:strokeColor="@color/colorPrimary"
         app:strokeWidth="1dp"
+        android:layout_marginBottom="20dp"
         >
     </com.google.android.material.button.MaterialButton>
 
