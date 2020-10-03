@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='GenericSL'
+rootProject.name='SunnySouthClient'
