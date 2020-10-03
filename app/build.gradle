@@ -47,12 +47,14 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.google.code.gson:gson:2.8.1'
+
     // Koin for Android
-        implementation "org.koin:koin-android:2.1.6"
+    implementation "org.koin:koin-android:2.1.6"
     // Koin Android Scope feature
-        implementation "org.koin:koin-android-scope:2.1.6"
+    implementation "org.koin:koin-android-scope:2.1.6"
     // Koin Android ViewModel feature
-        implementation "org.koin:koin-android-viewmodel:2.1.6"
+    implementation "org.koin:koin-android-viewmodel:2.1.6"
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.fragment:fragment-ktx:1.1.0'
+
 }
