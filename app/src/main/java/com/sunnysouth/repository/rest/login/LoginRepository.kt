@@ -26,13 +26,13 @@ class LoginRepository(private val viewModel: LoginViewModel) {
             }
 
             override fun onResponse(call: Call<LoginSuccess>, response: Response<LoginSuccess>) {
-                if(response.code() != 200){
+                if(response.code() === 200){
+                    val loginSuccess: LoginSuccess? = response.body()
+                    viewModel.setLoginSuccess(loginSuccess)
+                }else{
                     val errorBody = response.errorBody()
                     val messageError =  if(errorBody != null) errorBody.string() else context.getString(R.string.error_data_user)
                     viewModel.setLoginError(messageError)
-                }else{
-                    val loginSuccess: LoginSuccess? = response.body()
-                    viewModel.setLoginSuccess(loginSuccess)
                 }
             }
         })

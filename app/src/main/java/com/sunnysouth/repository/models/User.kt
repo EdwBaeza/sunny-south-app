@@ -4,20 +4,20 @@ import android.util.Patterns
 import java.lang.NumberFormatException
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import com.google.gson.annotations.SerializedName
 
-class User : BaseObservable()
+class User
 {
+    @SerializedName("username")
     lateinit var username: String
+    @SerializedName("first_name")
     lateinit var firstName: String
+    @SerializedName("last_name")
     lateinit var lastName: String
+    @SerializedName("phone_number")
     lateinit var phoneNumber: String
-
-    var email: String = ""
-        @Bindable get() = field
-        set(email) {
-            field=email
-        }
-
+    @SerializedName("email")
+    lateinit var email: String
     lateinit var password: String
     lateinit var passwordConfirmation: String
     /*  validar password >= 6  que esta en el modelo Login

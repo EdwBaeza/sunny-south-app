@@ -82,7 +82,7 @@ class RegisterActivity : AppCompatActivity(){
         //Click Envent 'Siguiente#2'
         formp3?.setOnClickListener{
 
-            user.username = username?.editText?.text.toString()
+            user.username = editName?.editText?.text.toString()
             user.email = email?.editText?.text.toString()
 
             if(user.credentialDataIsValid()){
