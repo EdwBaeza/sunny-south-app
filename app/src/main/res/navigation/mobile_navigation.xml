@@ -40,4 +40,10 @@
         android:name="com.sunnysouth.view.ui.fragment.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.sunnysouth.view.ui.fragment.UserProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

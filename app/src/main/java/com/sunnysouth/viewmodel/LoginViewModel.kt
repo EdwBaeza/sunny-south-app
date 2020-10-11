@@ -10,7 +10,7 @@ import com.sunnysouth.repository.rest.login.LoginRepository
 class LoginViewModel (): ViewModel(){
 
     private lateinit var context: Context
-    var service: LoginRepository = LoginRepository(this)
+    var repository: LoginRepository = LoginRepository(this)
     var loginSuccess: MutableLiveData<LoginSuccess> = MutableLiveData()
     var loginError:  MutableLiveData<String> = MutableLiveData()
     var authenticationState: MutableLiveData<AuthenticationState> = MutableLiveData()
@@ -22,7 +22,7 @@ class LoginViewModel (): ViewModel(){
     }
 
     fun login(login: Login){
-        service.login(login, this.context)
+        repository.login(login, this.context)
     }
 
     fun setContextApp(context: Context){
@@ -49,6 +49,7 @@ class LoginViewModel (): ViewModel(){
         val editor = sharedPref.edit()
         editor.putString("token", login?.access_token)
         editor.putString("email", login?.user?.email)
+        editor.putString("username", login?.user?.username)
         editor.apply()
     }
 }

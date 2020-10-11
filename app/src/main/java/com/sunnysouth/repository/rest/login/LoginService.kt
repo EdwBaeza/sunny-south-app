@@ -10,5 +10,4 @@ interface LoginService {
 
     @POST("users/login/")
     fun login(@Body login: Login): Call<LoginSuccess>
-
 }

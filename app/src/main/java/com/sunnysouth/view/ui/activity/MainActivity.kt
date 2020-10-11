@@ -54,7 +54,8 @@ class MainActivity : AppCompatActivity(){
                 R.id.nav_slideshow,
                 R.id.nav_tools,
                 R.id.nav_share,
-                R.id.nav_send
+                R.id.nav_send,
+                R.id.nav_profile
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
