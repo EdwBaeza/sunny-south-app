@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
+android.defaultConfig.vectorDrawables.useSupportLibrary = true
 
 android {
     compileSdkVersion 29
@@ -56,5 +57,11 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:2.1.6"
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.fragment:fragment-ktx:1.1.0'
+    // Recycler view androidx
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    // Card view androidx
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+
 
 }
