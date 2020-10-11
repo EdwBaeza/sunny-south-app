@@ -4,28 +4,30 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.sunnysouth.R
 import com.sunnysouth.repository.models.RegisterSuccess
 import com.sunnysouth.repository.models.User
-import com.sunnysouth.presenter.IRegisterPresenter
-import com.sunnysouth.presenter.RegisterPresenter
 import com.sunnysouth.view.ui.fragment.register.CredentialsDataFragment
 import com.sunnysouth.view.ui.fragment.register.PasswordDataFragment
 import com.sunnysouth.view.ui.fragment.register.PersonalDataFragment
 import com.google.android.material.button.MaterialButton
+import com.sunnysouth.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.fragment_credentials_data.*
 import kotlinx.android.synthetic.main.fragment_password_data.*
 import kotlinx.android.synthetic.main.fragment_personal_data.*
 
 class RegisterActivity : AppCompatActivity(){
 
-    lateinit var presenter: IRegisterPresenter
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView
+        viewModel.setContextApp(this)
         setContentView(R.layout.activity_register)
 
         //InvisibleButtons
@@ -109,9 +111,19 @@ class RegisterActivity : AppCompatActivity(){
                 if(user.passwordsAreEquals()){
                     if (!user.passwordIsOnlyNumeric()){
                         //init
-                        presenter = RegisterPresenter(this)
+                        //viewModel = RegisterPresenter(this)
                         //Api Register
-                        presenter.onRegister(user)
+                        viewModel.onRegister(user)
+
+                        viewModel.authenticationState.observe(this, Observer<RegisterViewModel.RegisterState> {
+
+                            if (it === RegisterViewModel.RegisterState.OK){
+                                onRegisterSuccess(viewModel.registerSuccess.value)
+                            }else if (it === RegisterViewModel.RegisterState.INVALID){
+                                onRegisterError(viewModel.registerError.value)
+                            }
+                        })
+
                     } else
                         Toast.makeText(this,"The password should not be just numbers",Toast.LENGTH_LONG).show()
                 } else
@@ -159,7 +171,7 @@ class RegisterActivity : AppCompatActivity(){
         startHome()
     }
 
-    fun onRegisterError(message: String) {
+    fun onRegisterError(message: String?) {
         Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 
