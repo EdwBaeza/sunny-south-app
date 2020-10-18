@@ -2,29 +2,34 @@ package com.sunnysouth.repository.models
 
 import android.util.Patterns
 import java.lang.NumberFormatException
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
 import com.google.gson.annotations.SerializedName
+import java.text.SimpleDateFormat
 
 class User
 {
+    lateinit var profile : Profile
+    @SerializedName("last_login")
+    var lastLogin: String? = null
     @SerializedName("username")
     lateinit var username: String
     @SerializedName("first_name")
     lateinit var firstName: String
     @SerializedName("last_name")
     lateinit var lastName: String
-    @SerializedName("phone_number")
-    lateinit var phoneNumber: String
+    @SerializedName("date_joined")
+    var dateJoined =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    @SerializedName("uuid")
+    lateinit var uuid: String
+    @SerializedName("created")
+    var created =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    @SerializedName("modified")
+    var modified =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
     @SerializedName("email")
     lateinit var email: String
+    @SerializedName("phone_number")
+    lateinit var phoneNumber: String
     lateinit var password: String
     lateinit var passwordConfirmation: String
-    /*  validar password >= 6  que esta en el modelo Login
-    validar phone 10 digitos
-    como validar el email esta en el modelo Login
-    ningun campo debe ser vacio
-*/
 
     fun personalDataIsValid():Boolean {
         if (firstName.isNullOrBlank() || lastName.isNullOrBlank())

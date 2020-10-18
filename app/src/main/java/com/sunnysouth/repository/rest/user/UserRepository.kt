@@ -2,8 +2,6 @@ package com.sunnysouth.repository.rest.user
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.sunnysouth.R
 import com.sunnysouth.config.BASE_URL
 import com.sunnysouth.repository.models.User
