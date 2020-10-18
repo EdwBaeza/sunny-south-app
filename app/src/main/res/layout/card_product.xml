@@ -50,23 +50,43 @@
 
         <TextView
             android:id="@+id/subtitle_text"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
             android:padding="6dp"
             android:text="subtitulo"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#8A000000"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/type_delivery_text"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text"
-            tools:text="MXN$99.00 30-40MIN Con servicio a domicilio." />
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Detalle ?" />
+
+        <TextView
+            android:id="@+id/type_delivery_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:padding="6dp"
+            android:text="subtitulo"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/colorAccent"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_text"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Con servicio a domicilio." />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
