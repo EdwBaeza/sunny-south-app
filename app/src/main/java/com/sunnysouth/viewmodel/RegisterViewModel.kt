@@ -15,7 +15,7 @@ class RegisterViewModel(): ViewModel(){
     private lateinit var context: Context
     var service: RegisterRepository = RegisterRepository(this)
     var registerSuccess: MutableLiveData<RegisterSuccess> = MutableLiveData()
-    var registerError: MutableLiveData<String> = MutableLiveData()
+    var registerError: MutableLiveData<MutableList<String>> = MutableLiveData()
     var authenticationState: MutableLiveData<RegisterViewModel.RegisterState> = MutableLiveData()
 
     enum class RegisterState {
@@ -31,8 +31,8 @@ class RegisterViewModel(): ViewModel(){
          service.getRegister(user, this.context)
     }
 
-     fun setRegisterError(message: String) {
-         this.registerError.value = message
+     fun setRegisterError(messages:MutableList<String>) {
+         this.registerError.value = messages
          this.setAuthenticationState(RegisterViewModel.RegisterState.INVALID)
      }
 

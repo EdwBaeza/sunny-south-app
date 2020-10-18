@@ -15,6 +15,7 @@ import com.sunnysouth.view.ui.fragment.register.CredentialsDataFragment
 import com.sunnysouth.view.ui.fragment.register.PasswordDataFragment
 import com.sunnysouth.view.ui.fragment.register.PersonalDataFragment
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sunnysouth.viewmodel.RegisterViewModel
 import kotlinx.android.synthetic.main.fragment_credentials_data.*
 import kotlinx.android.synthetic.main.fragment_password_data.*
@@ -23,6 +24,9 @@ import kotlinx.android.synthetic.main.fragment_personal_data.*
 class RegisterActivity : AppCompatActivity(){
 
     private val viewModel: RegisterViewModel by viewModels()
+    lateinit var formp4:MaterialButton
+    lateinit var formp3:MaterialButton
+    lateinit var formp2:MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,17 +34,16 @@ class RegisterActivity : AppCompatActivity(){
         viewModel.setContextApp(this)
         setContentView(R.layout.activity_register)
 
-        //InvisibleButtons
-        val formp4 = findViewById(R.id.go_to_register_form_p4) as? MaterialButton
-        formp4?.visibility = View.INVISIBLE
+        this.formp4 = (findViewById(R.id.go_to_register_form_p4) as? MaterialButton)!!
+        this.formp3 = (findViewById(R.id.go_to_register_form_p3) as? MaterialButton)!!
+        this.formp2 = (findViewById(R.id.go_to_register_form_p2) as? MaterialButton)!!
 
-        val formp3 = findViewById(R.id.go_to_register_form_p3) as? MaterialButton
+        formp4?.visibility = View.INVISIBLE
+        formp2?.visibility = View.VISIBLE
         formp3?.visibility = View.INVISIBLE
 
         val fragment_personal_data = PersonalDataFragment.newInstance()
         replaceFragment(fragment_personal_data,"personalFragment")
-
-        val formp2 = findViewById(R.id.go_to_register_form_p2) as? MaterialButton
 
         var user = User()
 
@@ -48,17 +51,6 @@ class RegisterActivity : AppCompatActivity(){
         formp2?.setOnClickListener{
             //get the text
             user.firstName = first_name?.editText?.text.toString()
-
-            /*first_name.addOnEditTextAttachedListener {
-                // If any specific changes should be done when the edit text is attached (and
-                // thus when the trailing icon is added to it), set an
-                // OnEditTextAttachedListener.
-
-                // Example: The clear text icon's visibility behavior depends on whether the
-                // EditText has input present. Therefore, an OnEditTextAttachedListener is set
-                // so things like editText.getText() can be called.
-            }
-            */
             user.lastName = last_name?.editText?.text.toString()
             user.phoneNumber = phone_number?.editText?.text.toString()
 
@@ -120,9 +112,11 @@ class RegisterActivity : AppCompatActivity(){
                             if (it === RegisterViewModel.RegisterState.OK){
                                 onRegisterSuccess(viewModel.registerSuccess.value)
                             }else if (it === RegisterViewModel.RegisterState.INVALID){
-                                onRegisterError(viewModel.registerError.value)
+                                onRegisterError(viewModel.registerError.value, user)
                             }
                         })
+
+                        //onRegisterSuccess(viewModel.registerSuccess.value)
 
                     } else
                         Toast.makeText(this,"The password should not be just numbers",Toast.LENGTH_LONG).show()
@@ -134,11 +128,6 @@ class RegisterActivity : AppCompatActivity(){
     }
 
     override fun onBackPressed() {
-
-        val formp4 = findViewById(R.id.go_to_register_form_p4) as? MaterialButton
-        val formp3 = findViewById(R.id.go_to_register_form_p3) as? MaterialButton
-        val formp2 = findViewById(R.id.go_to_register_form_p2) as? MaterialButton
-
         val fragmentCount = supportFragmentManager.backStackEntryCount
 
         if(fragmentCount>1){
@@ -167,16 +156,75 @@ class RegisterActivity : AppCompatActivity(){
         fragmentTransaction.commit()
     }
 
-    fun onRegisterSuccess(registerSuccess: RegisterSuccess?) {
-        startHome()
+    private fun onRegisterSuccess(registerSuccess: RegisterSuccess?) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Verifica tu correo electronico")
+            .setMessage("Hola ${registerSuccess?.user?.fullName()} verifica tu cuenta para tener acceso a todo lo que puede ofrecer la app")
+            .setPositiveButton("Regresar") { dialog, which ->
+                // Respond to positive button press
+                startLogin()
+            }
+            .setCancelable(false)
+            .show()
+        //startHome()
     }
 
-    fun onRegisterError(message: String?) {
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+    private fun onRegisterError(messages: MutableList<String>?, user:User) {
+
+        val items = messages?.toTypedArray()
+
+        // a qui comienza a volver a llenar el registro
+        this.editName?.editText?.setText(user.username)
+        this.email?.editText?.setText(user.email)
+        this.first_name?.editText?.setText(user.firstName)
+        this.last_name?.editText?.setText(user.lastName)
+        this.phone_number?.editText?.setText(user.phoneNumber)
+        this.password_user?.editText?.setText(user.password)
+        this.c_password_user?.editText?.setText(user.passwordConfirmation)
+
+        //Dialog del error
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Alerta")
+            .setItems(items) { dialog, index ->
+                // Respond to item chosen
+                var valor = items?.get(index)
+
+                if (valor?.contains("non_field")!!)
+                {
+                    val fragment_credential_data = CredentialsDataFragment.newInstance()
+                    replaceFragment(fragment_credential_data,"credentialsFragment")
+
+                    formp4?.visibility = View.VISIBLE
+                    formp2?.visibility = View.INVISIBLE
+                    formp3?.visibility = View.INVISIBLE
+                }
+
+                if (valor?.contains("username")!!)
+                {
+                    formp4?.visibility = View.INVISIBLE
+                    formp2?.visibility = View.INVISIBLE
+                    formp3?.visibility = View.VISIBLE
+
+                    val fragment_credential_data = CredentialsDataFragment.newInstance()
+                    replaceFragment(fragment_credential_data,"credentialsFragment")
+                }
+            }
+            .setNegativeButton("Cancelar"){dialog, which ->
+                startLogin()
+            }
+            .setCancelable(false)
+            .show()
+        //Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 
     private fun startHome() {
         val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun startLogin() {
+        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }

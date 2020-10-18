@@ -28,4 +28,13 @@
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
+    <!--<style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        &lt;!&ndash;buttons color&ndash;&gt;
+        <item name="colorAccent">@android:color/holo_orange_dark</item>
+        &lt;!&ndash;title and message color&ndash;&gt;
+        <item name="android:textColorPrimary">@android:color/white</item>
+        &lt;!&ndash;dialog background&ndash;&gt;
+        &lt;!&ndash;<item name="android:windowBackground">@drawable/background_dialog</item>&ndash;&gt;
+    </style>-->
+
 </resources>

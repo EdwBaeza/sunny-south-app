@@ -1,3 +1,3 @@
 package com.sunnysouth.repository.models
 
-class RegisterSuccess(user:User)
+class RegisterSuccess(val user:User)

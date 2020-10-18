@@ -19,11 +19,12 @@ class User
     @SerializedName("email")
     lateinit var email: String
     lateinit var password: String
+    @SerializedName("password_confirmation")
     lateinit var passwordConfirmation: String
     /*  validar password >= 6  que esta en el modelo Login
     validar phone 10 digitos
     como validar el email esta en el modelo Login
-    ningun campo debe ser vacio
+    ningun campo debe ser vacio virgilio es puto
 */
 
     fun personalDataIsValid():Boolean {
@@ -75,6 +76,10 @@ class User
     override fun toString(): String {
         return "$username"
 
+    }
+
+    fun fullName():String{
+        return  "$firstName $lastName"
     }
 
 
