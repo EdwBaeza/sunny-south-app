@@ -3,6 +3,7 @@ package com.sunnysouth.repository.models
 import android.util.Patterns
 import java.lang.NumberFormatException
 import com.google.gson.annotations.SerializedName
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 
 class User
@@ -17,13 +18,13 @@ class User
     @SerializedName("last_name")
     lateinit var lastName: String
     @SerializedName("date_joined")
-    var dateJoined =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    lateinit var dateJoined: Timestamp
     @SerializedName("uuid")
     lateinit var uuid: String
     @SerializedName("created")
-    var created =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    lateinit var created: Timestamp
     @SerializedName("modified")
-    var modified =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    lateinit var modified: Timestamp
     @SerializedName("email")
     lateinit var email: String
     @SerializedName("phone_number")

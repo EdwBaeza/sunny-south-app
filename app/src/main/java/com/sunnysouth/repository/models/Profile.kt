@@ -1,6 +1,7 @@
 package com.sunnysouth.repository.models
 
 import com.google.gson.annotations.SerializedName
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 
 class Profile {
@@ -9,9 +10,9 @@ class Profile {
     @SerializedName("uuid")
     lateinit var uuid: String
     @SerializedName("created")
-    var created =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    lateinit var created: Timestamp
     @SerializedName("modified")
-    var modified =  SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    lateinit var modified: Timestamp
     @SerializedName("slug_name")
     lateinit var slugName: String
     @SerializedName("biography")

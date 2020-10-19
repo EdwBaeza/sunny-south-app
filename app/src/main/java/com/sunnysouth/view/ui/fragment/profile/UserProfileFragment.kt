@@ -1,4 +1,4 @@
-package com.sunnysouth.view.ui.fragment
+package com.sunnysouth.view.ui.fragment.profile
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sunnysouth.R
-import com.sunnysouth.repository.models.User
 import com.sunnysouth.viewmodel.UserProfileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 
