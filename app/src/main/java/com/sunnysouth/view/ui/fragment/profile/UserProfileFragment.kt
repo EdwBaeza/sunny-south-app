@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.squareup.picasso.Picasso
 import com.sunnysouth.R
 import com.sunnysouth.viewmodel.UserProfileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
@@ -53,15 +54,14 @@ class UserProfileFragment : Fragment() {
             txtEmail.text = it.email
             txtPhone.text = it.phoneNumber
             txtPassword.text = "panfilo00"
+            Picasso.with(context)
+                .load(it.profile.picture)
+                .placeholder(R.drawable.fondo_mexico)
+                .error(R.drawable.fondo_mexico)
+                .into(circleImageProfile)
         })
 
         profileViewModel.getSessionUser()
-
-        /*Picasso.with(context)
-            .load("https://www.lavanguardia.com/r/GODO/LV/p7/WebSite/2020/04/14/Recortada/img_psola_20180724-165630_imagenes_lv_terceros_elite_101_unit_0049_r-kCsG-U48496101636McD-992x558@LaVanguardia-Web.jpg")
-            .placeholder(R.drawable.fondo_mexico)
-            .error(R.drawable.fondo_mexico)
-            .into(circleImageProfile)*/
 
         btnEditNameProfile.setOnClickListener {
             val builder = AlertDialog.Builder(activity)
