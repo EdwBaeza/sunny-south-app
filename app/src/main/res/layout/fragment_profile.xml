@@ -7,7 +7,7 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/txtNameProfile"
+        android:id="@+id/txtFirstNameProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fontFamily="sans-serif-black"
@@ -22,8 +22,8 @@
         android:layout_marginTop="12dp"
         android:background="#FFFFFF"
         android:text="Nombre"
-        app:layout_constraintBottom_toTopOf="@+id/txtNameProfile"
-        app:layout_constraintTop_toBottomOf="@+id/txtUsername"
+        app:layout_constraintBottom_toTopOf="@+id/txtFirstNameProfile"
+        app:layout_constraintTop_toBottomOf="@+id/txtUsernameProfile"
         app:layout_constraintVertical_bias="0.93"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp" />
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Apellido"
-        app:layout_constraintTop_toBottomOf="@+id/txtNameProfile"
+        app:layout_constraintTop_toBottomOf="@+id/txtFirstNameProfile"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp" />
 
@@ -58,7 +58,7 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/txtPhone"
+        android:id="@+id/txtPhoneProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -79,7 +79,7 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/txtEmail"
+        android:id="@+id/txtEmailProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fontFamily="sans-serif-black"
@@ -93,12 +93,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Contraseña"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailProfile"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/txtPassword"
+        android:id="@+id/txtPasswordProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -113,7 +113,6 @@
         android:id="@+id/imageProfile"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:src="@drawable/profile_default"
         app:civ_border_color="#FF000000"
         app:civ_border_width="1dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,13 +133,13 @@
         android:id="@+id/btnEditNameProfile"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginTop="236dp"
+        android:layout_marginTop="248dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:background="@color/colorWhite"
         android:tint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_edit_black_24dp"
@@ -150,14 +149,30 @@
         android:id="@+id/btnEditLastNameProfile"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginTop="287dp"
+        android:layout_marginTop="299dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:background="@color/colorWhite"
         android:tint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_edit_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ImageButton
+        android:id="@+id/btnEditPhoneNumberProfile"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:background="@color/colorWhite"
+        android:tint="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_edit_black_24dp"
         tools:ignore="VectorDrawableCompat" />
@@ -189,7 +204,7 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <TextView
-        android:id="@+id/txtUsername"
+        android:id="@+id/txtUsernameProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fontFamily="sans-serif-black"
@@ -198,13 +213,14 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnSaveData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Confirmar"
+        android:layout_marginTop="25dp"
+        android:text="Guardar cambios"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        android:textAllCaps="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,22 +6,22 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/textViewLastName"
+        android:id="@+id/textViewPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Apellido" />
+        android:text="Teléfono" />
 
     <EditText
-        android:id="@+id/editLastName"
+        android:id="@+id/editPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="16dp"
-        android:hint="Apellido"
+        android:hint="Teléfono"
         android:inputType="text" />
 
     <Button
-        android:id="@+id/btnActualizeLastName"
+        android:id="@+id/btnActualizePhoneNumber"
         android:layout_width="163dp"
         android:layout_height="wrap_content"
         android:text="Aceptar" />

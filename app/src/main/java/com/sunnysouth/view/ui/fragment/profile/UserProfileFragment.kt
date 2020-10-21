@@ -3,28 +3,35 @@ package com.sunnysouth.view.ui.fragment.profile
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import com.sunnysouth.R
+import com.sunnysouth.repository.models.UpdateUser
 import com.sunnysouth.viewmodel.UserProfileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
 
 class UserProfileFragment : Fragment() {
 
     private lateinit var profileViewModel: UserProfileViewModel
     private lateinit var root: View
+    var newFirstName: String = ""
+    var newLastName: String = ""
+    var newPhoneNumber: String = ""
+    lateinit var uri: Uri
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,26 +46,33 @@ class UserProfileFragment : Fragment() {
         val circleImageProfile: CircleImageView = root.findViewById(R.id.imageProfile)
         val btnEditNameProfile : ImageButton = root.findViewById(R.id.btnEditNameProfile)
         val btnEditLastNameProfile : ImageButton = root.findViewById(R.id.btnEditLastNameProfile)
+        val btnEditPhoneNumberProfile : ImageButton = root.findViewById(R.id.btnEditPhoneNumberProfile)
         val btnEditPhoto : ImageButton = root.findViewById(R.id.btnEditPhoto)
-        val txtNameProfile : TextView = root.findViewById(R.id.txtNameProfile)
+        val btnSaveData : Button = root.findViewById(R.id.btnSaveData)
+        val txtNameProfile : TextView = root.findViewById(R.id.txtFirstNameProfile)
         val txtLastNameProfile : TextView = root.findViewById(R.id.txtLastNameProfile)
-        val txtUsername : TextView = root.findViewById(R.id.txtUsername)
-        val txtPhone : TextView = root.findViewById(R.id.txtPhone)
-        val txtEmail : TextView = root.findViewById(R.id.txtEmail)
-        val txtPassword : TextView = root.findViewById(R.id.txtPassword)
+        val txtUsernameProfile : TextView = root.findViewById(R.id.txtUsernameProfile)
+        val txtPhoneProfile : TextView = root.findViewById(R.id.txtPhoneProfile)
+        val txtEmailProfile : TextView = root.findViewById(R.id.txtEmailProfile)
+        val txtPasswordProfile : TextView = root.findViewById(R.id.txtPasswordProfile)
 
         profileViewModel.user.observe(this, Observer {
-            txtUsername.text = it.username
+            txtUsernameProfile.text = it.username
             txtNameProfile.text = it.firstName
             txtLastNameProfile.text = it.lastName
-            txtEmail.text = it.email
-            txtPhone.text = it.phoneNumber
-            txtPassword.text = "panfilo00"
-            Picasso.with(context)
-                .load(it.profile.picture)
-                .placeholder(R.drawable.fondo_mexico)
-                .error(R.drawable.fondo_mexico)
-                .into(circleImageProfile)
+            txtEmailProfile.text = it.email
+            txtPhoneProfile.text = it.phoneNumber
+            txtPasswordProfile.text = "panfilo00"
+
+            if (it.profile.picture === ""){
+                circleImageProfile.setImageResource(R.drawable.profile_default)
+            }else{
+                Picasso.with(context)
+                    .load(it.profile.picture)
+                    .placeholder(R.drawable.profile_default)
+                    .error(R.drawable.profile_error)
+                    .into(circleImageProfile)
+            }
         })
 
         profileViewModel.getSessionUser()
@@ -78,7 +92,8 @@ class UserProfileFragment : Fragment() {
             dialog.show()
 
             btnActualizeFirstName.setOnClickListener {
-                txtNameProfile.text = editName.text
+                newFirstName = editName.text.toString()
+                txtNameProfile.text = newFirstName
                 dialog.cancel()
             }
         }
@@ -98,9 +113,48 @@ class UserProfileFragment : Fragment() {
             dialog.show()
 
             btnActualizeLastName.setOnClickListener {
-                txtLastNameProfile.text = editLastName.text
+                newLastName = editLastName.text.toString()
+                txtLastNameProfile.text = newLastName
                 dialog.cancel()
             }
+        }
+
+        btnEditPhoneNumberProfile.setOnClickListener {
+            val builder = AlertDialog.Builder(activity)
+            val inflater = activity!!.layoutInflater
+            val v: View = inflater.inflate(R.layout.fragment_edit_phone_number_profile, null)
+
+            val editPhoneNumber : EditText = v.findViewById(R.id.editPhoneNumber)
+            editPhoneNumber.setText(txtPhoneProfile.text)
+
+            val btnActualizePhoneNumber : Button = v.findViewById(R.id.btnActualizePhoneNumber)
+
+            builder.setView(v)
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+            btnActualizePhoneNumber.setOnClickListener {
+                newPhoneNumber = editPhoneNumber.text.toString()
+                txtPhoneProfile.text = newPhoneNumber
+                dialog.cancel()
+            }
+        }
+
+        btnSaveData.setOnClickListener {
+            if (newFirstName==""){
+                newFirstName = txtNameProfile.text.toString()
+            }
+            if (newLastName==""){
+                newLastName = txtLastNameProfile.text.toString()
+            }
+            if (newPhoneNumber==""){
+                newPhoneNumber = txtPhoneProfile.text.toString()
+            }
+
+            val updateUser = UpdateUser(newFirstName, newLastName, newPhoneNumber)
+            profileViewModel.updateUser(updateUser)
+            uploadPhotoGallery()
+            Toast.makeText(activity, "Datos actualizados", Toast.LENGTH_LONG).show()
         }
 
         btnEditPhoto.setOnClickListener {
@@ -118,7 +172,18 @@ class UserProfileFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK && requestCode == 123){
             val circleImageProfile: CircleImageView = root.findViewById(R.id.imageProfile)
-            circleImageProfile.setImageURI(data?.data)
+            uri = data?.data!!
+            circleImageProfile.setImageURI(uri)
         }
+    }
+
+    private fun uploadPhotoGallery(){
+        val text: String = uri.path.toString()
+        val file = File(text)
+        val requestFile =
+            RequestBody.create(MediaType.parse("image/jpeg"), file)
+        val body =
+            MultipartBody.Part.createFormData("image", file.name, requestFile)
+        profileViewModel.uploadPhoto(body)
     }
 }

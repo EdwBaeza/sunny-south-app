@@ -24,6 +24,6 @@
         android:id="@+id/btnActualizeFirstName"
         android:layout_width="163dp"
         android:layout_height="wrap_content"
-        android:text="Actualizar" />
+        android:text="Aceptar" />
 
 </LinearLayout>
