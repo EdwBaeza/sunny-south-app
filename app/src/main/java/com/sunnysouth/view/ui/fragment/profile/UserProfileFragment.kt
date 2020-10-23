@@ -2,10 +2,14 @@ package com.sunnysouth.view.ui.fragment.profile
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.ContentResolver
 import android.content.Intent
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.os.FileUtils
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +24,7 @@ import com.sunnysouth.viewmodel.UserProfileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 import okhttp3.MediaType
 import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import java.io.File
 
@@ -151,8 +156,8 @@ class UserProfileFragment : Fragment() {
                 newPhoneNumber = txtPhoneProfile.text.toString()
             }
 
-            val updateUser = UpdateUser(newFirstName, newLastName, newPhoneNumber)
-            profileViewModel.updateUser(updateUser)
+            //val updateUser = UpdateUser(newFirstName, newLastName, newPhoneNumber)
+            //profileViewModel.updateUser(updateUser)
             uploadPhotoGallery()
             Toast.makeText(activity, "Datos actualizados", Toast.LENGTH_LONG).show()
         }
@@ -177,13 +182,28 @@ class UserProfileFragment : Fragment() {
         }
     }
 
-    private fun uploadPhotoGallery(){
-        val text: String = uri.path.toString()
-        val file = File(text)
-        val requestFile =
-            RequestBody.create(MediaType.parse("image/jpeg"), file)
-        val body =
-            MultipartBody.Part.createFormData("image", file.name, requestFile)
+    private fun uploadPhotoGallery() {
+        val realURI = getRealPath(uri)
+        val file = File(realURI)
+        val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
+        val body = MultipartBody.Part.createFormData("picture", file.name, requestFile)
         profileViewModel.uploadPhoto(body)
+
     }
+
+    private fun getRealPath(baseUri: Uri): String? {
+        var cursor: Cursor? = null
+        val column = "_data"
+        try {
+            cursor = this.context?.contentResolver?.query(uri, null, null, null, null)
+            if (cursor != null && cursor.moveToFirst()) {
+                val columnIndex: Int = cursor.getColumnIndexOrThrow(column)
+                return cursor.getString(columnIndex)
+            }
+        } finally {
+            cursor?.close()
+        }
+        return null
+    }
+
 }
