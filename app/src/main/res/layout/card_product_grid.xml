@@ -17,7 +17,7 @@
 
 
         <TextView
-            android:id="@+id/calification3"
+            android:id="@+id/score"
             android:layout_width="wrap_content"
             android:layout_height="17dp"
             android:layout_marginEnd="4dp"
@@ -119,7 +119,7 @@
             tools:text="Price" />
 
         <TextView
-            android:id="@+id/delivery_type"
+            android:id="@+id/type_delivery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
