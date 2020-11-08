@@ -26,9 +26,9 @@ import org.koin.android.viewmodel.ext.android.getViewModel
 class RegisterActivity : AppCompatActivity(){
 
     val viewModel: RegisterViewModel by viewModels()
-    lateinit var formp4:MaterialButton
-    lateinit var formp3:MaterialButton
-    lateinit var formp2:MaterialButton
+    lateinit var passWordDataBtn:MaterialButton
+    lateinit var credentialDataBtn:MaterialButton
+    lateinit var personalDataBtn:MaterialButton
     var fragment_personal_data = PersonalDataFragment.newInstance()
     lateinit var fragment_credential_data:Fragment
     lateinit var fragment_password_data:Fragment
@@ -39,18 +39,18 @@ class RegisterActivity : AppCompatActivity(){
         viewModel.setContextApp(this)
         setContentView(R.layout.activity_register)
 
-        this.formp4 = (findViewById(R.id.go_to_register_form_p4) as? MaterialButton)!!
-        this.formp3 = (findViewById(R.id.go_to_register_form_p3) as? MaterialButton)!!
-        this.formp2 = (findViewById(R.id.go_to_register_form_p2) as? MaterialButton)!!
+        this.passWordDataBtn = (findViewById(R.id.passwordBtn) as? MaterialButton)!!
+        this.credentialDataBtn = (findViewById(R.id.credentialBtn) as? MaterialButton)!!
+        this.personalDataBtn = (findViewById(R.id.personalBtn) as? MaterialButton)!!
 
-        formp4?.visibility = View.INVISIBLE
-        formp2?.visibility = View.VISIBLE
-        formp3?.visibility = View.INVISIBLE
+        passWordDataBtn?.visibility = View.INVISIBLE
+        personalDataBtn?.visibility = View.VISIBLE
+        credentialDataBtn?.visibility = View.INVISIBLE
 
         replaceFragment(fragment_personal_data, "personalFragment")
 
         //Click Envent 'Siguiente#1'
-        formp2?.setOnClickListener{
+        personalDataBtn?.setOnClickListener{
             //get the text
             var firstName = findViewById<EditText>(R.id.first_name)
             var lastName = findViewById<EditText>(R.id.last_name)
@@ -64,8 +64,8 @@ class RegisterActivity : AppCompatActivity(){
                     var userObj = it
                     if(it.IsValidpersonalData())
                     {
-                        formp3?.visibility = View.VISIBLE
-                        formp2?.visibility = View.INVISIBLE
+                        credentialDataBtn?.visibility = View.VISIBLE
+                        personalDataBtn?.visibility = View.INVISIBLE
 
                         fragment_credential_data = CredentialsDataFragment.newInstance()
                         replaceFragment(fragment_credential_data, "credentialsFragment")
@@ -77,7 +77,7 @@ class RegisterActivity : AppCompatActivity(){
         }
 
         //Click Envent 'Siguiente#2'
-        formp3?.setOnClickListener{
+        credentialDataBtn?.setOnClickListener{
 
             var userName = findViewById<EditText>(R.id.editName)
             var email = findViewById<EditText>(R.id.email)
@@ -88,9 +88,9 @@ class RegisterActivity : AppCompatActivity(){
                 this,
                 Observer<User> {
                     if(it.IsValidcredentialData()){
-                        formp4?.visibility = View.VISIBLE
-                        formp2?.visibility = View.INVISIBLE
-                        formp3?.visibility = View.INVISIBLE
+                        passWordDataBtn?.visibility = View.VISIBLE
+                        personalDataBtn?.visibility = View.INVISIBLE
+                        credentialDataBtn?.visibility = View.INVISIBLE
 
                         fragment_password_data = PasswordDataFragment.newInstance()
                         replaceFragment(fragment_password_data, "pwdFragment")
@@ -101,8 +101,8 @@ class RegisterActivity : AppCompatActivity(){
         }
 
         //Click Envent 'Envio'
-        formp4?.setOnClickListener{
-            formp4.isEnabled = false
+        passWordDataBtn?.setOnClickListener{
+            passWordDataBtn.isEnabled = false
 
             var password = findViewById<EditText>(R.id.password_user)
             var cPassword = findViewById<EditText>(R.id.c_password_user)
@@ -122,14 +122,14 @@ class RegisterActivity : AppCompatActivity(){
                                 if (it === RegisterViewModel.RegisterState.OK) {
                                     onRegisterSuccess(viewModel.registerSuccess.value)
                                 } else if (it === RegisterViewModel.RegisterState.INVALID) {
-                                    formp4.isEnabled = true
+                                    passWordDataBtn.isEnabled = true
                                     onRegisterError(viewModel.registerError.value, user)
                                     viewModel.clear()
                                 }
                             })
                     } else
                     {
-                        formp4.isEnabled = true
+                        passWordDataBtn.isEnabled = true
                         this.onUserError(user.userErrors, "Error con las contraseñas")
                     }
                 })
@@ -144,13 +144,13 @@ class RegisterActivity : AppCompatActivity(){
         when(currentFragment?.tag)
         {
             "credentialsFragment" ->{
-                formp3?.visibility = View.INVISIBLE
-                formp2?.visibility = View.VISIBLE
+                credentialDataBtn?.visibility = View.INVISIBLE
+                personalDataBtn?.visibility = View.VISIBLE
                 replaceFragment(fragment_personal_data, "personalFragment")
             }
             "pwdFragment"->{
-                formp4?.visibility = View.INVISIBLE
-                formp3?.visibility = View.VISIBLE
+                passWordDataBtn?.visibility = View.INVISIBLE
+                credentialDataBtn?.visibility = View.VISIBLE
                 replaceFragment(fragment_credential_data, "credentialsFragment")
             }
             "personalFragment"->{
@@ -211,9 +211,9 @@ class RegisterActivity : AppCompatActivity(){
 
                 if (valor?.contains("username")!! || valor?.contains("email")!!)
                 {
-                    formp4?.visibility = View.INVISIBLE
-                    formp2?.visibility = View.INVISIBLE
-                    formp3?.visibility = View.VISIBLE
+                    passWordDataBtn?.visibility = View.INVISIBLE
+                    personalDataBtn?.visibility = View.INVISIBLE
+                    credentialDataBtn?.visibility = View.VISIBLE
 
                     replaceFragment(fragment_credential_data, "credentialsFragment")
                 }

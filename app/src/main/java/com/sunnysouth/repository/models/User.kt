@@ -54,8 +54,8 @@ class User
         if (!RegexValidator.CharactersAndNumbersOnly(username))
             this.userErrors.add("The username may only contain letters and numbers")
 
-        if (username.isNullOrBlank() || email.isNullOrBlank())
-            this.userErrors.add("The username and email must have a valor")
+        if (username.isNullOrBlank())
+            this.userErrors.add("The username must have a valor")
 
         if (!emailIsValid(email))
             this.userErrors.add("the email is not formatted correctly")
@@ -64,7 +64,7 @@ class User
     }
 
     private fun emailIsValid(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return !email.isNullOrBlank() || Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     fun IsValidpasswordsData():Boolean {
