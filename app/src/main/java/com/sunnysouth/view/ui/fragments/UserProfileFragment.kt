@@ -1,4 +1,4 @@
-package com.sunnysouth.view.ui.fragment
+package com.sunnysouth.view.ui.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -8,14 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import com.sunnysouth.R
 import com.sunnysouth.repository.models.User
 import com.sunnysouth.viewmodel.UserProfileViewModel
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class UserProfileFragment : Fragment() {

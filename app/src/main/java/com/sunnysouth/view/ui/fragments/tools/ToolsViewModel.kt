@@ -1,13 +1,13 @@
-package com.sunnysouth.view.ui.fragment.share
+package com.sunnysouth.view.ui.fragments.tools
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ShareViewModel : ViewModel() {
+class ToolsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is share Fragment"
+        value = "This is tools Fragment"
     }
     val text: LiveData<String> = _text
 }

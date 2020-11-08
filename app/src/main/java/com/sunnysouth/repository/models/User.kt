@@ -2,12 +2,13 @@ package com.sunnysouth.repository.models
 
 import android.util.Patterns
 import java.lang.NumberFormatException
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
 import com.google.gson.annotations.SerializedName
-
+import com.sunnysouth.repository.utils.RegexValidator
+const val PHONE_NUMBER_MAX_VALUE = 10
+const val PASSWORD_MIN_VALUE = 8
 class User
 {
+
     @SerializedName("username")
     lateinit var username: String
     @SerializedName("first_name")
@@ -21,55 +22,71 @@ class User
     lateinit var password: String
     @SerializedName("password_confirmation")
     lateinit var passwordConfirmation: String
-    /*  validar password >= 6  que esta en el modelo Login
-    validar phone 10 digitos
-    como validar el email esta en el modelo Login
-    ningun campo debe ser vacio virgilio es puto
-*/
+    var userErrors:MutableList<String> = arrayListOf()
 
-    fun personalDataIsValid():Boolean {
+
+
+    fun IsValidpersonalData():Boolean {
+        this.userErrors.clear()
+
+        if (!RegexValidator.CharactersAndNumbersOnly(firstName)
+            && !RegexValidator.CharactersAndNumbersOnly(lastName))
+            this.userErrors.add("The first and last name may only contain letters and numbers")
+
         if (firstName.isNullOrBlank() || lastName.isNullOrBlank())
-            return false
-        return true
+            this.userErrors.add("The first and last name must have a valor")
+
+        if(phoneNumber.length != PHONE_NUMBER_MAX_VALUE)
+            this.userErrors.add("The phone number must be equal to 10")
+
+        if (!IsOnlyNumeric(phoneNumber))
+            this.userErrors.add("The phone number must be only numbers")
+
+        return this.userErrors.isNullOrEmpty()
     }
 
-    fun emailIsValid():Boolean {
+/*    fun emailIsValid():Boolean {
         return emailIsValid(email)
-    }
+    }*/
 
-    fun credentialDataIsValid():Boolean {
+    fun IsValidcredentialData():Boolean {
+        this.userErrors.clear()
+        if (!RegexValidator.CharactersAndNumbersOnly(username))
+            this.userErrors.add("The username may only contain letters and numbers")
+
         if (username.isNullOrBlank() || email.isNullOrBlank())
-            return false
-        return true
+            this.userErrors.add("The username and email must have a valor")
+
+        if (!emailIsValid(email))
+            this.userErrors.add("the email is not formatted correctly")
+
+        return this.userErrors.isNullOrEmpty()
     }
 
     private fun emailIsValid(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    fun phoneNumberValidation():Boolean {
-        return (phoneNumber.length == 10)
-    }
+    fun IsValidpasswordsData():Boolean {
+        this.userErrors.clear()
 
-    fun passwordsDataIsValid():Boolean {
         if (password.isNullOrBlank() || password.isNullOrBlank())
-            return false
-        else if (password.length<8)
-            return false
-        return true
+            this.userErrors.add("The passwords must have a valor")
+        if (password.length<PASSWORD_MIN_VALUE)
+            this.userErrors.add("The passwords must be at least 8 characters")
+        if (!passwordsAreEquals())
+            this.userErrors.add("The passwords aren't equals")
+        if (IsOnlyNumeric(password))
+            this.userErrors.add("The password should not be just numbers")
+
+        return this.userErrors.isNullOrEmpty()
     }
 
-    fun passwordIsOnlyNumeric():Boolean {
-        try {
-            Integer.parseInt(password)
-        }
-        catch(e:NumberFormatException) {
-            return false
-        }
-        return true
+    private fun IsOnlyNumeric(text:String):Boolean {
+        return RegexValidator.NumbersOnly(text)
     }
 
-    fun passwordsAreEquals():Boolean {
+    private fun passwordsAreEquals():Boolean {
         return (password.equals(passwordConfirmation))
     }
 
@@ -81,8 +98,8 @@ class User
     fun fullName():String{
         return  "$firstName $lastName"
     }
-
-
 }
+
+
 
 
