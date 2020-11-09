@@ -13,7 +13,7 @@ import org.koin.core.parameter.parametersOf
 class RegisterViewModel(): ViewModel(){
 
     private lateinit var context: Context
-    var service: RegisterRepository = RegisterRepository(this)
+    private var service: RegisterRepository = RegisterRepository(this)
     var registerSuccess: MutableLiveData<RegisterSuccess> = MutableLiveData()
     var registerError: MutableLiveData<MutableList<String>> = MutableLiveData()
     var authenticationState: MutableLiveData<RegisterViewModel.RegisterState> = MutableLiveData()

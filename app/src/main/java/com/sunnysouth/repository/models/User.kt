@@ -26,7 +26,7 @@ class User
 
 
 
-    fun IsValidpersonalData():Boolean {
+    fun IsValidPersonalData():Boolean {
         this.userErrors.clear()
 
         if (!RegexValidator.CharactersAndNumbersOnly(firstName)
@@ -49,7 +49,7 @@ class User
         return emailIsValid(email)
     }*/
 
-    fun IsValidcredentialData():Boolean {
+    fun IsValidCredentialData():Boolean {
         this.userErrors.clear()
         if (!RegexValidator.CharactersAndNumbersOnly(username))
             this.userErrors.add("The username may only contain letters and numbers")
@@ -67,12 +67,12 @@ class User
         return !email.isNullOrBlank() || Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    fun IsValidpasswordsData():Boolean {
+    fun IsValidPasswordsData():Boolean {
         this.userErrors.clear()
 
         if (password.isNullOrBlank() || password.isNullOrBlank())
             this.userErrors.add("The passwords must have a valor")
-        if (password.length<PASSWORD_MIN_VALUE)
+        if (password.length < PASSWORD_MIN_VALUE)
             this.userErrors.add("The passwords must be at least 8 characters")
         if (!passwordsAreEquals())
             this.userErrors.add("The passwords aren't equals")

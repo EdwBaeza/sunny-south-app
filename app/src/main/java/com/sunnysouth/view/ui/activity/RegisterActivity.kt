@@ -29,9 +29,9 @@ class RegisterActivity : AppCompatActivity(){
     lateinit var passWordDataBtn:MaterialButton
     lateinit var credentialDataBtn:MaterialButton
     lateinit var personalDataBtn:MaterialButton
-    var fragment_personal_data = PersonalDataFragment.newInstance()
-    lateinit var fragment_credential_data:Fragment
-    lateinit var fragment_password_data:Fragment
+    var fragmentPersonalData = PersonalDataFragment.newInstance()
+    lateinit var fragmentCredentialData:Fragment
+    lateinit var fragmentPasswordData:Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +47,7 @@ class RegisterActivity : AppCompatActivity(){
         personalDataBtn?.visibility = View.VISIBLE
         credentialDataBtn?.visibility = View.INVISIBLE
 
-        replaceFragment(fragment_personal_data, "personalFragment")
+        replaceFragment(fragmentPersonalData, "personalFragment")
 
         //Click Envent 'Siguiente#1'
         personalDataBtn?.setOnClickListener{
@@ -62,13 +62,12 @@ class RegisterActivity : AppCompatActivity(){
                 this,
                 Observer<User> {
                     var userObj = it
-                    if(it.IsValidpersonalData())
-                    {
+                    if(it.IsValidPersonalData()){
                         credentialDataBtn?.visibility = View.VISIBLE
                         personalDataBtn?.visibility = View.INVISIBLE
 
-                        fragment_credential_data = CredentialsDataFragment.newInstance()
-                        replaceFragment(fragment_credential_data, "credentialsFragment")
+                        fragmentCredentialData = CredentialsDataFragment.newInstance()
+                        replaceFragment(fragmentCredentialData, "credentialsFragment")
                     }
                     else
                         this.onUserError(it.userErrors, "Error con los datos personales")
@@ -87,13 +86,13 @@ class RegisterActivity : AppCompatActivity(){
             viewModel.user.observe(
                 this,
                 Observer<User> {
-                    if(it.IsValidcredentialData()){
+                    if(it.IsValidCredentialData()){
                         passWordDataBtn?.visibility = View.VISIBLE
                         personalDataBtn?.visibility = View.INVISIBLE
                         credentialDataBtn?.visibility = View.INVISIBLE
 
-                        fragment_password_data = PasswordDataFragment.newInstance()
-                        replaceFragment(fragment_password_data, "pwdFragment")
+                        fragmentPasswordData = PasswordDataFragment.newInstance()
+                        replaceFragment(fragmentPasswordData, "pwdFragment")
                     } else
                         this.onUserError(it.userErrors, "Error con el usuario o email")
                 })
@@ -112,7 +111,7 @@ class RegisterActivity : AppCompatActivity(){
             viewModel.user.observe(
                 this,
                 Observer<User> { user ->
-                    if(user.IsValidpasswordsData()){
+                    if(user.IsValidPasswordsData()){
                         viewModel.onRegister(user)
 
                         viewModel.authenticationState.observe(
@@ -127,8 +126,7 @@ class RegisterActivity : AppCompatActivity(){
                                     viewModel.clear()
                                 }
                             })
-                    } else
-                    {
+                    } else{
                         passWordDataBtn.isEnabled = true
                         this.onUserError(user.userErrors, "Error con las contraseñas")
                     }
@@ -137,21 +135,18 @@ class RegisterActivity : AppCompatActivity(){
     }
 
     override fun onBackPressed() {
-        //val fragmentCount = supportFragmentManager.backStackEntryCount
-
         val currentFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.fragmentContainer);
 
-        when(currentFragment?.tag)
-        {
+        when(currentFragment?.tag) {
             "credentialsFragment" ->{
                 credentialDataBtn?.visibility = View.INVISIBLE
                 personalDataBtn?.visibility = View.VISIBLE
-                replaceFragment(fragment_personal_data, "personalFragment")
+                replaceFragment(fragmentPersonalData, "personalFragment")
             }
             "pwdFragment"->{
                 passWordDataBtn?.visibility = View.INVISIBLE
                 credentialDataBtn?.visibility = View.VISIBLE
-                replaceFragment(fragment_credential_data, "credentialsFragment")
+                replaceFragment(fragmentCredentialData, "credentialsFragment")
             }
             "personalFragment"->{
                 finish()
@@ -160,23 +155,6 @@ class RegisterActivity : AppCompatActivity(){
             }
         }
 
-        /*if(fragmentCount>1){
-            when(fragmentCount){
-                3 -> {
-                    formp4?.visibility = View.INVISIBLE
-                    formp3?.visibility = View.VISIBLE
-                }
-                2 -> {
-                    formp3?.visibility = View.INVISIBLE
-                    formp2?.visibility = View.VISIBLE
-                }
-            }
-            super.onBackPressed()
-        } else if(fragmentCount === 1){
-            finish()
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }*/
     }
 
     private fun  replaceFragment(fragment: Fragment, tag: String) {
@@ -215,7 +193,7 @@ class RegisterActivity : AppCompatActivity(){
                     personalDataBtn?.visibility = View.INVISIBLE
                     credentialDataBtn?.visibility = View.VISIBLE
 
-                    replaceFragment(fragment_credential_data, "credentialsFragment")
+                    replaceFragment(fragmentCredentialData, "credentialsFragment")
                 }
             }
             .setNegativeButton("Cancelar"){ dialog, which ->
@@ -235,7 +213,6 @@ class RegisterActivity : AppCompatActivity(){
             .setPositiveButton("Ok", null)
             .setCancelable(false)
             .show()
-        //Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 
     private fun startHome() {

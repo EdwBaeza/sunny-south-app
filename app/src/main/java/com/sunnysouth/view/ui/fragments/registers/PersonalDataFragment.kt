@@ -29,15 +29,6 @@ class PersonalDataFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        /*var viewModel = (this.activity as RegisterActivity?)?.viewModel
-        var user = (this.activity as RegisterActivity?)?.viewModel?.user?.value
-
-        user?.firstName = this.first_name?.text.toString()
-        user?.lastName = this.last_name?.text.toString()
-        user?.phoneNumber = this.phone_number?.text.toString()
-
-        (this.activity as RegisterActivity?)?.viewModel?.setUser(user!!)*/
         arguments?.let {
             //param1 = it.getString(ARG_PARAM1)
             //param2 = it.getString(ARG_PARAM2)

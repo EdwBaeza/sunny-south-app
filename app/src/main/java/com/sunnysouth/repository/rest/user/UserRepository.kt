@@ -29,12 +29,10 @@ class UserRepository(private val viewModel: UserProfileViewModel){
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if(response.code() === 200){
                     val user = response.body()
-                    user.let {
-                        if (it != null) {
-                            viewModel.setSessionUser(it)
-                        }
+                    user?.let {
+                        viewModel.setSessionUser(it)
                     }
-                    Log.i("Error test", "prueba")
+                    //Log.i("Error test", "prueba")
                 }else{
                     val errorBody = response.errorBody()
                     val messageError =  if(errorBody != null) errorBody.string() else context.getString(
