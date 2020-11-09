@@ -32,7 +32,6 @@ class UserRepository(private val viewModel: UserProfileViewModel){
                     user?.let {
                         viewModel.setSessionUser(it)
                     }
-                    //Log.i("Error test", "prueba")
                 }else{
                     val errorBody = response.errorBody()
                     val messageError =  if(errorBody != null) errorBody.string() else context.getString(
