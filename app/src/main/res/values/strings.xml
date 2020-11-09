@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Generic SL</string>
+    <string name="app_name">SunnySouth</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -8,6 +8,7 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="menu_profile">Mi Cuenta</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -28,7 +29,7 @@
     <string name="nav_header_title">Menu</string>
     <string name="nav_header_subtitle">genericsl@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_logout">Salir</string>
+    <string name="action_logout">Cerrar Sesión</string>
     <string name="dont_have_account">¿No tienes una cuenta?</string>
     <string name="create_account">. Crea una aquí</string>
     <string name="name_register">Nombre</string>

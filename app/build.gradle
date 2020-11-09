@@ -10,7 +10,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.genericsl"
+        applicationId "com.sunnysouth"
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
@@ -47,5 +47,15 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.google.code.gson:gson:2.8.1'
-    implementation 'org.koin:koin-android:2.1.5'
+
+    // Koin for Android
+    implementation "org.koin:koin-android:2.1.6"
+    // Koin Android Scope feature
+    implementation "org.koin:koin-android-scope:2.1.6"
+    // Koin Android ViewModel feature
+    implementation "org.koin:koin-android-viewmodel:2.1.6"
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.fragment:fragment-ktx:1.1.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
 }

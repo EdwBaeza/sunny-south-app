@@ -7,37 +7,43 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.genericsl.view.ui.fragment.home.HomeFragment"
+        android:name="com.sunnysouth.view.ui.fragments.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.genericsl.view.ui.fragment.gallery.GalleryFragment"
+        android:name="com.sunnysouth.view.ui.fragments.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.genericsl.view.ui.fragment.slideshow.SlideshowFragment"
+        android:name="com.sunnysouth.view.ui.fragments.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="com.genericsl.view.ui.fragment.tools.ToolsFragment"
+        android:name="com.sunnysouth.view.ui.fragments.tools.ToolsFragment"
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
         android:id="@+id/nav_share"
-        android:name="com.genericsl.view.ui.fragment.share.ShareFragment"
+        android:name="com.sunnysouth.view.ui.fragments.share.ShareFragment"
         android:label="@string/menu_share"
         tools:layout="@layout/fragment_share" />
 
     <fragment
         android:id="@+id/nav_send"
-        android:name="com.genericsl.view.ui.fragment.send.SendFragment"
+        android:name="com.sunnysouth.view.ui.fragments.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.sunnysouth.view.ui.fragments.UserProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
