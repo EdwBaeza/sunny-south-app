@@ -1,4 +1,4 @@
-package com.sunnysouth.view.ui.fragment.share
+package com.sunnysouth.view.ui.fragments.send
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sunnysouth.R
 
-class ShareFragment : Fragment() {
+class SendFragment : Fragment() {
 
-    private lateinit var shareViewModel: ShareViewModel
+    private lateinit var sendViewModel: SendViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        shareViewModel =
-            ViewModelProviders.of(this).get(ShareViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_share, container, false)
-        val textView: TextView = root.findViewById(R.id.text_share)
-        shareViewModel.text.observe(this, Observer {
+        sendViewModel =
+            ViewModelProviders.of(this).get(SendViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_send, container, false)
+        val textView: TextView = root.findViewById(R.id.text_send)
+        sendViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

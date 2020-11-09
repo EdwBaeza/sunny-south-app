@@ -1,4 +1,4 @@
-package com.sunnysouth.view.ui.fragment.register
+package com.sunnysouth.view.ui.fragments.registers
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

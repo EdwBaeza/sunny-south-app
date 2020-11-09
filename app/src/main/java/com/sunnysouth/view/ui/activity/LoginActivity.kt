@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
             progressBar!!.visibility = View.VISIBLE
             val email = email?.editText?.text.toString()
-            val password = password?.editText?.text.toString()
+            val password = editLastName?.editText?.text.toString()
             val login = Login(email, password)
             viewModel.login(login)
         }

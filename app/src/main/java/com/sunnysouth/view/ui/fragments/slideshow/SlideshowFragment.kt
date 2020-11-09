@@ -1,4 +1,4 @@
-package com.sunnysouth.view.ui.fragment.slideshow
+package com.sunnysouth.view.ui.fragments.slideshow
 
 import android.os.Bundle
 import android.view.LayoutInflater
