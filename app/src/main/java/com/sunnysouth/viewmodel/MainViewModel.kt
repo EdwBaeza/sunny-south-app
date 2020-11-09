@@ -3,7 +3,6 @@ package com.sunnysouth.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 
-
 class MainViewModel: ViewModel(){
 
     private lateinit var context: Context
@@ -17,5 +16,10 @@ class MainViewModel: ViewModel(){
         val editor = sharedPref.edit()
         editor.clear()
         editor.apply()
+    }
+
+    fun getEmail(): String? {
+        val sharedPref = context.getSharedPreferences("user_credentials", Context.MODE_PRIVATE)
+        return sharedPref.getString("email", null)
     }
 }

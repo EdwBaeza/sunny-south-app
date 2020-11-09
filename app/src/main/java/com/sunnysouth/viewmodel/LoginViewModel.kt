@@ -47,9 +47,14 @@ class LoginViewModel (): ViewModel(){
     private fun saveDataLogin(login: LoginSuccess?) {
         val sharedPref = this.context.getSharedPreferences("user_credentials", Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
-        editor.putString("token", login?.access_token)
+        editor.putString("token", login?.accessToken)
         editor.putString("email", login?.user?.email)
         editor.putString("username", login?.user?.username)
         editor.apply()
+    }
+
+    fun getToken(): String? {
+        val sharedPref = this.context.getSharedPreferences("user_credentials", Context.MODE_PRIVATE)
+        return sharedPref.getString("token", null)
     }
 }

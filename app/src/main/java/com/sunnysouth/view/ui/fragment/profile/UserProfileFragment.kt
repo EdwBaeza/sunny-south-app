@@ -3,16 +3,13 @@ package com.sunnysouth.view.ui.fragment.profile
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.FileUtils
 import android.provider.MediaStore
-import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +26,6 @@ import com.sunnysouth.viewmodel.UserProfileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 import okhttp3.MediaType
 import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import java.io.File
 
@@ -42,6 +38,7 @@ class UserProfileFragment : Fragment() {
     var newLastName: String = ""
     var newPhoneNumber: String = ""
     lateinit var uri: Uri
+    var photoCondition: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -161,9 +158,11 @@ class UserProfileFragment : Fragment() {
                 newPhoneNumber = txtPhoneProfile.text.toString()
             }
 
-            //val updateUser = UpdateUser(newFirstName, newLastName, newPhoneNumber)
-            //profileViewModel.updateUser(updateUser)
-            uploadPhotoGallery()
+            val updateUser = UpdateUser(newFirstName, newLastName, newPhoneNumber)
+            profileViewModel.updateUser(updateUser)
+            if(photoCondition){
+                uploadPhotoGallery()
+            }
             Toast.makeText(activity, "Datos actualizados", Toast.LENGTH_LONG).show()
         }
 
@@ -184,6 +183,7 @@ class UserProfileFragment : Fragment() {
             val circleImageProfile: CircleImageView = root.findViewById(R.id.imageProfile)
             uri = data?.data!!
             circleImageProfile.setImageURI(uri)
+            photoCondition = true
         }
     }
 

@@ -1,7 +1,6 @@
 package com.sunnysouth.view.ui.activity
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -72,8 +71,7 @@ class MainActivity : AppCompatActivity(){
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
-        val sharedPref = this.getSharedPreferences("user_credentials", Context.MODE_PRIVATE)
-        val getEmail : String? = sharedPref.getString("email", null)
+        val getEmail = viewModel.getEmail()
         val emailUser : TextView = findViewById(R.id.email_user)
         emailUser.text =  getEmail
         return true

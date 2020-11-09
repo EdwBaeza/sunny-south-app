@@ -7,7 +7,6 @@ import com.sunnysouth.repository.models.UpdateUser
 import com.sunnysouth.repository.models.User
 import com.sunnysouth.repository.rest.user.UserRepository
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 
 class UserProfileViewModel (): ViewModel(){
 
