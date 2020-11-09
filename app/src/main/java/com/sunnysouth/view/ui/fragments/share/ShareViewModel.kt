@@ -1,13 +1,13 @@
-package com.sunnysouth.view.ui.fragment.send
+package com.sunnysouth.view.ui.fragments.share
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SendViewModel : ViewModel() {
+class ShareViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is send Fragment"
+        value = "This is share Fragment"
     }
     val text: LiveData<String> = _text
 }

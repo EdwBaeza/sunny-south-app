@@ -1,11 +1,16 @@
-package com.sunnysouth.view.ui.fragment.register
+package com.sunnysouth.view.ui.fragments.registers
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.sunnysouth.R
+import com.sunnysouth.repository.models.User
+import com.sunnysouth.view.ui.activity.RegisterActivity
+import kotlinx.android.synthetic.main.fragment_personal_data.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
