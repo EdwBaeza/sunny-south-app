@@ -1,11 +1,14 @@
 package com.sunnysouth.view.ui.fragment.profile
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentResolver
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.FileUtils
 import android.provider.MediaStore
@@ -14,6 +17,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -163,7 +168,7 @@ class UserProfileFragment : Fragment() {
         }
 
         btnEditPhoto.setOnClickListener {
-            openGallery()
+            checkPermission()
         }
         return root
     }
@@ -206,4 +211,26 @@ class UserProfileFragment : Fragment() {
         return null
     }
 
+    private fun checkPermission() {
+        if(ContextCompat.checkSelfPermission(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(activity!!, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            //permiso no aceptado por el momento
+            requestPermission()
+        }else{
+            openGallery()
+        }
+    }
+
+    private fun requestPermission() {
+        if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE) || ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.CAMERA)){
+            //se rechazo, volver a pedirlos cada ves q inicie la app
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA), 777)
+            }
+        }else{
+            //pedir permisos
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA), 777)
+            }
+        }
+    }
 }
