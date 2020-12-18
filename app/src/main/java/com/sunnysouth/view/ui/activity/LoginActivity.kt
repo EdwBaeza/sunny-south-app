@@ -23,8 +23,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.setContextApp(this)
-        val sharedPref = this.getSharedPreferences("user_credentials", Context.MODE_PRIVATE)
-        val token: String? = sharedPref.getString("token", null)
+        val token = viewModel.getToken()
 
         if (token !== null) {
             startHome()
@@ -34,7 +33,6 @@ class LoginActivity : AppCompatActivity() {
         progressBar = findViewById<ProgressBar>(R.id.progress_Bar)
 
         email_sign_in_button.setOnClickListener {
-
             progressBar!!.visibility = View.VISIBLE
             val email = email?.editText?.text.toString()
             val password = editLastName?.editText?.text.toString()
@@ -47,7 +45,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         viewModel.authenticationState.observe(this, Observer<LoginViewModel.AuthenticationState> {
-
             if (it === LoginViewModel.AuthenticationState.AUTHENTICATED){
                 loginSuccess(viewModel.loginSuccess.value)
             }else if (it === LoginViewModel.AuthenticationState.INVALID_AUTHENTICATION){
@@ -59,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginSuccess(login: LoginSuccess?) {
         progressBar!!.visibility = View.INVISIBLE
-        Toast.makeText(this,login?.access_token,Toast.LENGTH_LONG).show()
+        Toast.makeText(this,login?.accessToken,Toast.LENGTH_LONG).show()
         startHome()
     }
 
