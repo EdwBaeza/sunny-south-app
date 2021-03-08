@@ -1,30 +1,40 @@
 package com.sunnysouth.repository.models
 
 import android.util.Patterns
-import java.lang.NumberFormatException
 import com.google.gson.annotations.SerializedName
 import com.sunnysouth.repository.utils.RegexValidator
-const val PHONE_NUMBER_MAX_VALUE = 10
-const val PASSWORD_MIN_VALUE = 8
+import java.sql.Timestamp
+
 class User
 {
-
+    lateinit var profile : Profile
+    @SerializedName("last_login")
+    var lastLogin: String? = null
     @SerializedName("username")
     lateinit var username: String
     @SerializedName("first_name")
     lateinit var firstName: String
     @SerializedName("last_name")
     lateinit var lastName: String
-    @SerializedName("phone_number")
-    lateinit var phoneNumber: String
+    @SerializedName("date_joined")
+    lateinit var dateJoined: Timestamp
+    @SerializedName("uuid")
+    lateinit var uuid: String
+    @SerializedName("created")
+    lateinit var created: Timestamp
+    @SerializedName("modified")
+    lateinit var modified: Timestamp
     @SerializedName("email")
     lateinit var email: String
+    @SerializedName("phone_number")
+    lateinit var phoneNumber: String
     lateinit var password: String
     @SerializedName("password_confirmation")
     lateinit var passwordConfirmation: String
+
     var userErrors:MutableList<String> = arrayListOf()
-
-
+    var PHONE_NUMBER_MAX_VALUE = 10
+    var PASSWORD_MIN_VALUE = 6
 
     fun IsValidPersonalData():Boolean {
         this.userErrors.clear()

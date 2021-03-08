@@ -36,6 +36,8 @@
     <string name="lastname_register">Apellido</string>
     <string name="error_data_user">Los datos ingresados no son válidos</string>
     <string name="error_in_login">Error en el login</string>
+    <string name="error_in_ready_user">Error en la lectura del user</string>
+    <string name="error_in_update_user">Error al actualizar los datos</string>
     <string name="data_invalid">Datos Inválidos</string>
     <string name="sign_off">Cerraste Sesión</string>
 </resources>

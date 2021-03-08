@@ -3,12 +3,10 @@ package com.sunnysouth.viewmodel
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sunnysouth.repository.models.LoginSuccess
 import com.sunnysouth.repository.rest.register.RegisterRepository
 import com.sunnysouth.repository.models.RegisterSuccess
 import com.sunnysouth.repository.models.User
-import com.sunnysouth.repository.rest.login.LoginRepository
-import org.koin.core.parameter.parametersOf
+
 
 class RegisterViewModel(): ViewModel(){
 

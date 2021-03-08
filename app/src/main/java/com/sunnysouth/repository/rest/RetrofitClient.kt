@@ -15,7 +15,7 @@ class RetrofitClient {
         if (retrofit == null) {
             retrofit = Retrofit.Builder().baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
-                //.client(getUnsafeOkHttpClient().build())
+                .client(getUnsafeOkHttpClient().build())
                 .build()
         }
         return retrofit
