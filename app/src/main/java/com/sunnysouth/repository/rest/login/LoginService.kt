@@ -8,6 +8,6 @@ import retrofit2.http.POST
 
 interface LoginService {
 
-    @POST("users/login/")
+    @POST("token/")
     fun login(@Body login: Login): Call<LoginSuccess>
 }

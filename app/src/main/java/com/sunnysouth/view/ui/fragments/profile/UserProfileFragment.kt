@@ -5,7 +5,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -21,157 +20,170 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import com.sunnysouth.R
-import com.sunnysouth.repository.models.UpdateUser
 import com.sunnysouth.viewmodel.UserProfileViewModel
+import com.sunnysouth.repository.models.User
+import com.sunnysouth.repository.models.Profile
+import com.sunnysouth.utils.getRealPath
+import com.sunnysouth.utils.FactoryFile
 import de.hdodenhof.circleimageview.CircleImageView
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import java.io.File
 
 
 class UserProfileFragment : Fragment() {
 
     private lateinit var profileViewModel: UserProfileViewModel
     private lateinit var root: View
-    var newFirstName: String = ""
-    var newLastName: String = ""
-    var newPhoneNumber: String = ""
-    lateinit var uri: Uri
-    var photoCondition: Boolean = false
+    private lateinit var uri: Uri
+    private var photoCondition = false
+
     private val codePermission = 777
     private val codeGallery = 123
+
+    // UI
+    private lateinit var circleImageProfile: CircleImageView
+    private lateinit var btnEditNameProfile: ImageButton
+    private lateinit var btnEditLastNameProfile: ImageButton
+    private lateinit var btnEditPhoneNumberProfile: ImageButton
+    private lateinit var btnEditBiographyProfile: ImageButton
+    private lateinit var btnEditPhoto: ImageButton
+    private lateinit var btnSaveData: Button
+    private lateinit var txtNameProfile: TextView
+    private lateinit var txtLastNameProfile: TextView
+    private lateinit var txtUsernameProfile: TextView
+    private lateinit var txtPhoneProfile: TextView
+    private lateinit var txtEmailProfile: TextView
+    private lateinit var txtPasswordProfile: TextView
+    private lateinit var txtBiographyProfile: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        profileViewModel =
-            ViewModelProviders.of(this).get(UserProfileViewModel::class.java)
-        this.activity?.let { profileViewModel.setContextApp(it) }
+        profileViewModel = ViewModelProviders.of(this).get(UserProfileViewModel::class.java)
+        this.activity?.let { profileViewModel.context =  it }
 
         this.root = inflater.inflate(R.layout.fragment_profile, container, false)
-        val circleImageProfile: CircleImageView = root.findViewById(R.id.imageProfile)
-        val btnEditNameProfile : ImageButton = root.findViewById(R.id.btnEditNameProfile)
-        val btnEditLastNameProfile : ImageButton = root.findViewById(R.id.btnEditLastNameProfile)
-        val btnEditPhoneNumberProfile : ImageButton = root.findViewById(R.id.btnEditPhoneNumberProfile)
-        val btnEditPhoto : ImageButton = root.findViewById(R.id.btnEditPhoto)
-        val btnSaveData : Button = root.findViewById(R.id.btnSaveData)
-        val txtNameProfile : TextView = root.findViewById(R.id.txtFirstNameProfile)
-        val txtLastNameProfile : TextView = root.findViewById(R.id.txtLastNameProfile)
-        val txtUsernameProfile : TextView = root.findViewById(R.id.txtUsernameProfile)
-        val txtPhoneProfile : TextView = root.findViewById(R.id.txtPhoneProfile)
-        val txtEmailProfile : TextView = root.findViewById(R.id.txtEmailProfile)
-        val txtPasswordProfile : TextView = root.findViewById(R.id.txtPasswordProfile)
+        this.circleImageProfile = root.findViewById(R.id.imageProfile)
+        this.btnEditNameProfile = root.findViewById(R.id.btnEditNameProfile)
+        this.btnEditLastNameProfile = root.findViewById(R.id.btnEditLastNameProfile)
+        this.btnEditPhoneNumberProfile = root.findViewById(R.id.btnEditPhoneNumberProfile)
+        this.btnEditPhoto = root.findViewById(R.id.btnEditPhoto)
+        this.btnEditBiographyProfile = root.findViewById(R.id.btnEditBiographyProfile)
+        this.btnSaveData = root.findViewById(R.id.btnSaveData)
+        this.txtNameProfile = root.findViewById(R.id.txtFirstNameProfile)
+        this.txtLastNameProfile = root.findViewById(R.id.txtLastNameProfile)
+        this.txtUsernameProfile = root.findViewById(R.id.txtUsernameProfile)
+        this.txtPhoneProfile = root.findViewById(R.id.txtPhoneProfile)
+        this.txtEmailProfile = root.findViewById(R.id.txtEmailProfile)
+        this.txtPasswordProfile = root.findViewById(R.id.txtPasswordProfile)
+        this.txtBiographyProfile = root.findViewById(R.id.txtBiographyProfile)
 
         profileViewModel.user.observe(this, Observer {
-            txtUsernameProfile.text = it.username
-            txtNameProfile.text = it.firstName
-            txtLastNameProfile.text = it.lastName
-            txtEmailProfile.text = it.email
-            txtPhoneProfile.text = it.phoneNumber
-            txtPasswordProfile.text = "panfilo00"
-
-            if (it.profile.picture === ""){
-                circleImageProfile.setImageResource(R.drawable.profile_default)
-            }else{
-                Picasso.with(context)
-                    .load(it.profile.picture)
-                    .placeholder(R.drawable.profile_default)
-                    .error(R.drawable.profile_error)
-                    .into(circleImageProfile)
-            }
+            observeUser(it)
         })
 
-        profileViewModel.getSessionUser()
+        profileViewModel.getCurrentUser()
 
         btnEditNameProfile.setOnClickListener {
-            val builder = AlertDialog.Builder(activity)
-            val inflater = activity!!.layoutInflater
-            val v: View = inflater.inflate(R.layout.fragment_edit_first_name_profile, null)
-
-            val editName : EditText = v.findViewById(R.id.editName)
-            editName.setText(txtNameProfile.text)
-
-            val btnActualizeFirstName : Button = v.findViewById(R.id.btnActualizeFirstName)
-
-            builder.setView(v)
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
-
-            btnActualizeFirstName.setOnClickListener {
-                newFirstName = editName.text.toString()
-                txtNameProfile.text = newFirstName
-                dialog.cancel()
-            }
+            buildAlertDialog(
+                R.layout.fragment_edit_first_name_profile,
+                R.id.editName,
+                R.id.txtFirstNameProfile,
+                R.id.btnActualizeFirstName
+            )
         }
 
         btnEditLastNameProfile.setOnClickListener {
-            val builder = AlertDialog.Builder(activity)
-            val inflater = activity!!.layoutInflater
-            val v: View = inflater.inflate(R.layout.fragment_edit_last_name_profile, null)
-
-            val editLastName : EditText = v.findViewById(R.id.editLastName)
-            editLastName.setText(txtLastNameProfile.text)
-
-            val btnActualizeLastName : Button = v.findViewById(R.id.btnActualizeLastName)
-
-            builder.setView(v)
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
-
-            btnActualizeLastName.setOnClickListener {
-                newLastName = editLastName.text.toString()
-                txtLastNameProfile.text = newLastName
-                dialog.cancel()
-            }
+            buildAlertDialog(
+                R.layout.fragment_edit_last_name_profile,
+                R.id.editLastName,
+                R.id.txtLastNameProfile,
+                R.id.btnActualizeLastName
+            )
         }
 
         btnEditPhoneNumberProfile.setOnClickListener {
-            val builder = AlertDialog.Builder(activity)
-            val inflater = activity!!.layoutInflater
-            val v: View = inflater.inflate(R.layout.fragment_edit_phone_number_profile, null)
-
-            val editPhoneNumber : EditText = v.findViewById(R.id.editPhoneNumber)
-            editPhoneNumber.setText(txtPhoneProfile.text)
-
-            val btnActualizePhoneNumber : Button = v.findViewById(R.id.btnActualizePhoneNumber)
-
-            builder.setView(v)
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
-
-            btnActualizePhoneNumber.setOnClickListener {
-                newPhoneNumber = editPhoneNumber.text.toString()
-                txtPhoneProfile.text = newPhoneNumber
-                dialog.cancel()
-            }
+            buildAlertDialog(
+                R.layout.fragment_edit_phone_number_profile,
+                R.id.editPhoneNumber,
+                R.id.txtPhoneProfile,
+                R.id.btnActualizePhoneNumber
+            )
         }
 
-        btnSaveData.setOnClickListener {
-            if (newFirstName==""){
-                newFirstName = txtNameProfile.text.toString()
-            }
-            if (newLastName==""){
-                newLastName = txtLastNameProfile.text.toString()
-            }
-            if (newPhoneNumber==""){
-                newPhoneNumber = txtPhoneProfile.text.toString()
-            }
-
-            val updateUser = UpdateUser(newFirstName, newLastName, newPhoneNumber)
-            profileViewModel.updateUser(updateUser)
-            if(photoCondition){
-                uploadPhotoGallery()
-            }
-            Toast.makeText(activity, "Datos actualizados", Toast.LENGTH_LONG).show()
+        btnEditBiographyProfile.setOnClickListener {
+            buildAlertDialog(
+                R.layout.fragment_edit_biography_profile,
+                R.id.editBiography,
+                R.id.txtBiographyProfile,
+                R.id.btnActualizeBiography
+            )
         }
 
-        btnEditPhoto.setOnClickListener {
-            checkPermission()
-        }
+        btnSaveData.setOnClickListener(::update)
+        btnEditPhoto.setOnClickListener(::checkPermission)
+
         return root
+    }
+
+    private fun observeUser(user: User){
+        txtUsernameProfile.text = user.username
+        txtNameProfile.text = user.firstName
+        txtLastNameProfile.text = user.lastName
+        txtEmailProfile.text = user.email
+        txtPhoneProfile.text = user.phoneNumber
+        txtPasswordProfile.text = "SECRET"
+        txtBiographyProfile.text = user.profile.biography
+
+
+        if (user.profile.picture.isNullOrEmpty()){
+            circleImageProfile.setImageResource(R.drawable.profile_default)
+            return
+        }
+
+        Picasso.with(context)
+            .load(user.profile.picture)
+            .placeholder(R.drawable.profile_default)
+            .error(R.drawable.profile_error)
+            .into(circleImageProfile)
+    }
+
+    private fun buildAlertDialog(fragmentId: Int, editTextId: Int, textViewId: Int, btnSaveDataId: Int) {
+        val builder = AlertDialog.Builder(activity)
+        val inflater = activity!!.layoutInflater
+        val v: View = inflater.inflate(fragmentId, null)
+        val textView: TextView = this.root.findViewById(textViewId)
+        val editText: EditText = v.findViewById(editTextId)
+        var dialog: AlertDialog
+
+        editText.setText(textView.text)
+        builder.setView(v)
+        dialog = builder.create()
+        dialog.show()
+
+        (v.findViewById(btnSaveDataId) as Button).setOnClickListener{
+            textView.text = editText.text.toString()
+            dialog.cancel()
+        }
+    }
+
+    private fun update(view: View): Unit {
+        val user = User()
+        val profile = Profile()
+
+        user.profile = profile
+        user.profile.biography = txtBiographyProfile.text.toString()
+        user.firstName = txtNameProfile.text.toString()
+        user.lastName = txtLastNameProfile.text.toString()
+        user.phoneNumber = txtPhoneProfile.text.toString()
+
+        profileViewModel.update(user)
+
+        if(photoCondition){
+            uploadPictureProfile()
+        }
+
+        Toast.makeText(activity, "Datos actualizados", Toast.LENGTH_LONG).show()
     }
 
     private fun openGallery() {
@@ -189,33 +201,14 @@ class UserProfileFragment : Fragment() {
         }
     }
 
-    private fun uploadPhotoGallery() {
-        val realURI = getRealPath(uri)
-        val file = File(realURI)
-        val requestFile = RequestBody.create(MediaType.parse("image/jpeg"), file)
-        val body = MultipartBody.Part.createFormData("picture", file.name, requestFile)
-        profileViewModel.uploadPhoto(body)
-
+    private fun uploadPictureProfile() {
+        val realURI = getRealPath(this.context, this.uri)
+        profileViewModel.uploadPhoto(FactoryFile.buildMultiPartFormData(realURI, "picture", "image/jpeg"))
     }
 
-    private fun getRealPath(baseUri: Uri): String? {
-        var cursor: Cursor? = null
-        val column = "_data"
-        try {
-            cursor = this.context?.contentResolver?.query(uri, null, null, null, null)
-            if (cursor != null && cursor.moveToFirst()) {
-                val columnIndex: Int = cursor.getColumnIndexOrThrow(column)
-                return cursor.getString(columnIndex)
-            }
-        } finally {
-            cursor?.close()
-        }
-        return null
-    }
-
-    private fun checkPermission() {
-        if(ContextCompat.checkSelfPermission(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(activity!!, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            //permiso no aceptado por el momento
+    private fun checkPermission(view: View): Unit {
+        if(ContextCompat.checkSelfPermission(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+            || ContextCompat.checkSelfPermission(activity!!, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             requestPermission()
         }else{
             openGallery()
@@ -223,13 +216,14 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun requestPermission() {
-        if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE) || ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.CAMERA)){
-            //se rechazo, volver a pedirlos cada ves q inicie la app
+        if(ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE)
+            || ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.CAMERA)){
+            //permisisions denied
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA), codePermission)
             }
         }else{
-            //pedir permisos
+            // Permissions requested
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA), codePermission)
             }

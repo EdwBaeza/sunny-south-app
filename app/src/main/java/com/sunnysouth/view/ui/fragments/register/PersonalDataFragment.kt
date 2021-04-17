@@ -1,11 +1,10 @@
-package com.sunnysouth.view.ui.fragments.registers
+package com.sunnysouth.view.ui.fragments.register
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.sunnysouth.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -15,10 +14,10 @@ import com.sunnysouth.R
 
 /**
  * A simple [Fragment] subclass.
- * Use the [PasswordDataFragment.newInstance] factory method to
+ * Use the [PersonalDataFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PasswordDataFragment : Fragment() {
+class PersonalDataFragment : Fragment() {
     // TODO: Rename and change types of parameters
     //private var param1: String? = null
     //private var param2: String? = null
@@ -36,7 +35,7 @@ class PasswordDataFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_password_data, container, false)
+        return inflater.inflate(R.layout.fragment_personal_data, container, false)
     }
 
     companion object {
@@ -46,14 +45,18 @@ class PasswordDataFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment PasswordDataFragment.
+         * @return A new instance of fragment PersonalDataFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-            PasswordDataFragment().apply {
+            PersonalDataFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

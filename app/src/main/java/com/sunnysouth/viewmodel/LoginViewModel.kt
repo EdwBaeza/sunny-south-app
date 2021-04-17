@@ -7,9 +7,8 @@ import com.sunnysouth.repository.models.Login
 import com.sunnysouth.repository.models.LoginSuccess
 import com.sunnysouth.repository.rest.login.LoginRepository
 
-class LoginViewModel (): ViewModel(){
+class LoginViewModel(): BaseViewModel(){
 
-    private lateinit var context: Context
     var repository: LoginRepository = LoginRepository(this)
     var loginSuccess: MutableLiveData<LoginSuccess> = MutableLiveData()
     var loginError:  MutableLiveData<String> = MutableLiveData()

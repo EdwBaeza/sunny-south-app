@@ -3,9 +3,7 @@ package com.sunnysouth.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 
-class MainViewModel: ViewModel(){
-
-    private lateinit var context: Context
+class MainViewModel(): BaseViewModel(){
 
     fun setContextApp(context: Context){
         this.context = context

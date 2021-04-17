@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -12,16 +11,13 @@ import androidx.lifecycle.Observer
 import com.sunnysouth.R
 import com.sunnysouth.repository.models.RegisterSuccess
 import com.sunnysouth.repository.models.User
-import com.sunnysouth.view.ui.fragments.registers.CredentialsDataFragment
-import com.sunnysouth.view.ui.fragments.registers.PasswordDataFragment
-import com.sunnysouth.view.ui.fragments.registers.PersonalDataFragment
+import com.sunnysouth.view.ui.fragments.register.CredentialsDataFragment
+import com.sunnysouth.view.ui.fragments.register.PasswordDataFragment
+import com.sunnysouth.view.ui.fragments.register.PersonalDataFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sunnysouth.viewmodel.RegisterViewModel
-import kotlinx.android.synthetic.main.fragment_credentials_data.*
-import kotlinx.android.synthetic.main.fragment_password_data.*
 import kotlinx.android.synthetic.main.fragment_personal_data.*
-import org.koin.android.viewmodel.ext.android.getViewModel
 
 class RegisterActivity : AppCompatActivity(){
 
@@ -35,8 +31,8 @@ class RegisterActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView
-        viewModel.setContextApp(this)
+
+        viewModel.context = this
         setContentView(R.layout.activity_register)
 
         this.passWordDataBtn = (findViewById(R.id.passwordBtn) as? MaterialButton)!!
@@ -62,7 +58,7 @@ class RegisterActivity : AppCompatActivity(){
                 this,
                 Observer<User> {
                     var userObj = it
-                    if(it.IsValidPersonalData()){
+                    if(it.isValidPersonalData()){
                         credentialDataBtn?.visibility = View.VISIBLE
                         personalDataBtn?.visibility = View.INVISIBLE
 
@@ -86,7 +82,7 @@ class RegisterActivity : AppCompatActivity(){
             viewModel.user.observe(
                 this,
                 Observer<User> {
-                    if(it.IsValidCredentialData()){
+                    if(it.isValidCredentialData()){
                         passWordDataBtn?.visibility = View.VISIBLE
                         personalDataBtn?.visibility = View.INVISIBLE
                         credentialDataBtn?.visibility = View.INVISIBLE
@@ -111,7 +107,7 @@ class RegisterActivity : AppCompatActivity(){
             viewModel.user.observe(
                 this,
                 Observer<User> { user ->
-                    if(user.IsValidPasswordsData()){
+                    if(user.isValidPasswordsData()){
                         viewModel.onRegister(user)
 
                         viewModel.authenticationState.observe(

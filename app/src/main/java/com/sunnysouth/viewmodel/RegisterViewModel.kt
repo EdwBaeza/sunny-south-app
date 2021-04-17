@@ -8,13 +8,12 @@ import com.sunnysouth.repository.models.RegisterSuccess
 import com.sunnysouth.repository.models.User
 
 
-class RegisterViewModel(): ViewModel(){
+class RegisterViewModel(): BaseViewModel(){
 
-    private lateinit var context: Context
-    private var service: RegisterRepository = RegisterRepository(this)
-    var registerSuccess: MutableLiveData<RegisterSuccess> = MutableLiveData()
-    var registerError: MutableLiveData<MutableList<String>> = MutableLiveData()
-    var authenticationState: MutableLiveData<RegisterViewModel.RegisterState> = MutableLiveData()
+    private var service  = RegisterRepository(this)
+    var registerSuccess = MutableLiveData<RegisterSuccess>()
+    var registerError = MutableLiveData<MutableList<String>>()
+    var authenticationState = MutableLiveData<RegisterState>()
     var user: MutableLiveData<User> = MutableLiveData()
 
     init{
@@ -27,22 +26,18 @@ class RegisterViewModel(): ViewModel(){
         NONE
     }
 
-    fun setContextApp(context: Context){
-        this.context = context
-    }
-
      fun onRegister(user: User) {
          service.getRegister(user, this.context)
     }
 
      fun setRegisterError(messages:MutableList<String>) {
          this.registerError.value = messages
-         this.setAuthenticationState(RegisterViewModel.RegisterState.INVALID)
+         this.setAuthenticationState(RegisterState.INVALID)
      }
 
      fun setRegisterSuccess(registerSuccess: RegisterSuccess?) {
          this.registerSuccess.value = registerSuccess
-         this.setAuthenticationState(RegisterViewModel.RegisterState.OK)
+         this.setAuthenticationState(RegisterState.OK)
     }
 
     fun setUser(user:User){
@@ -66,10 +61,10 @@ class RegisterViewModel(): ViewModel(){
     }
 
     fun clear() {
-        this.setAuthenticationState(RegisterViewModel.RegisterState.NONE)
+        this.setAuthenticationState(RegisterState.NONE)
     }
 
-    private fun setAuthenticationState(authenticationState: RegisterViewModel.RegisterState){
+    private fun setAuthenticationState(authenticationState: RegisterState){
         this.authenticationState.value = authenticationState
     }
 

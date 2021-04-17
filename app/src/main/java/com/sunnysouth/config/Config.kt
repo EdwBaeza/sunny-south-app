@@ -1,4 +1,5 @@
 package com.sunnysouth.config
 
-const val API: String = "api/v1/"
-const val BASE_URL: String = "https://sunnysouthtech.com/${API}"
+const val API_VERSION = "api/v1/"
+const val BASE_URL = "https://8478493c56aa.ngrok.io/${API_VERSION}"
+
