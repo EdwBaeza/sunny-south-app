@@ -25,8 +25,8 @@ class UserProfileViewModel(): BaseViewModel(){
     }
 
     fun update(user: User){
-        val (token, username) = getUserPreferences()
-        this.repository.update(token, username, user ,this.context)
+        val (token, _) = getUserPreferences()
+        this.repository.update(token, user, this.context)
     }
 
     fun uploadPhoto(picture: MultipartBody.Part){

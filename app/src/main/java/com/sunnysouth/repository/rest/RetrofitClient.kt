@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
 import java.security.cert.CertificateException
+import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
@@ -46,7 +47,7 @@ class RetrofitClient {
                 // Create an ssl socket factory with our all-trusting manager
                 val sslSocketFactory = sslContext.socketFactory
 
-                val builder = OkHttpClient.Builder()
+                val builder = OkHttpClient.Builder().connectTimeout(2, TimeUnit.MINUTES)
                 builder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
                 builder.hostnameVerifier { _, _ -> true }
 

@@ -1,4 +1,4 @@
-package com.sunnysouth.view.ui.fragments.home
+package com.sunnysouth.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,8 +15,7 @@ class HomeViewModel : BaseViewModel() {
     var repository = CategoryRepository(this)
 
     fun getCategories(){
-        val (token, _) = getUserPreferences()
-        repository.getTopCategories(token, this.context)
+        repository.getTopCategories(this.context)
     }
 
 }

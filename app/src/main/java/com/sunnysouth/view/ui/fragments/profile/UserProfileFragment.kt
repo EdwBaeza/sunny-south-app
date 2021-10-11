@@ -51,7 +51,6 @@ class UserProfileFragment : Fragment() {
     private lateinit var txtUsernameProfile: TextView
     private lateinit var txtPhoneProfile: TextView
     private lateinit var txtEmailProfile: TextView
-    private lateinit var txtPasswordProfile: TextView
     private lateinit var txtBiographyProfile: TextView
 
     override fun onCreateView(
@@ -75,12 +74,21 @@ class UserProfileFragment : Fragment() {
         this.txtUsernameProfile = root.findViewById(R.id.txtUsernameProfile)
         this.txtPhoneProfile = root.findViewById(R.id.txtPhoneProfile)
         this.txtEmailProfile = root.findViewById(R.id.txtEmailProfile)
-        this.txtPasswordProfile = root.findViewById(R.id.txtPasswordProfile)
         this.txtBiographyProfile = root.findViewById(R.id.txtBiographyProfile)
 
-        profileViewModel.user.observe(this, Observer {
-            observeUser(it)
-        })
+        profileViewModel.user.observe(
+            viewLifecycleOwner,
+            Observer {
+                observeUser(it)
+            }
+        )
+
+        profileViewModel.userError.observe(
+            viewLifecycleOwner,
+            Observer {
+                printError(it)
+            }
+        )
 
         profileViewModel.getCurrentUser()
 
@@ -132,7 +140,6 @@ class UserProfileFragment : Fragment() {
         txtLastNameProfile.text = user.lastName
         txtEmailProfile.text = user.email
         txtPhoneProfile.text = user.phoneNumber
-        txtPasswordProfile.text = "SECRET"
         txtBiographyProfile.text = user.profile.biography
 
 
@@ -148,17 +155,20 @@ class UserProfileFragment : Fragment() {
             .into(circleImageProfile)
     }
 
+    private fun printError(message: String){
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+    }
+
     private fun buildAlertDialog(fragmentId: Int, editTextId: Int, textViewId: Int, btnSaveDataId: Int) {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity!!.layoutInflater
         val v: View = inflater.inflate(fragmentId, null)
         val textView: TextView = this.root.findViewById(textViewId)
         val editText: EditText = v.findViewById(editTextId)
-        var dialog: AlertDialog
 
         editText.setText(textView.text)
         builder.setView(v)
-        dialog = builder.create()
+        var dialog: AlertDialog = builder.create()
         dialog.show()
 
         (v.findViewById(btnSaveDataId) as Button).setOnClickListener{
@@ -169,9 +179,7 @@ class UserProfileFragment : Fragment() {
 
     private fun update(view: View): Unit {
         val user = User()
-        val profile = Profile()
-
-        user.profile = profile
+        user.profile = Profile()
         user.profile.biography = txtBiographyProfile.text.toString()
         user.firstName = txtNameProfile.text.toString()
         user.lastName = txtLastNameProfile.text.toString()

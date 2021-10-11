@@ -10,11 +10,11 @@ interface UserService{
     @GET("users/{username}/")
     fun findByUsername(@Header("Authorization") token: String, @Path("username") username: String): Call<User>
 
-    @GET("users/me/")
+    @GET("users/me")
     fun getCurrentUser(@Header("Authorization") token: String): Call<User>
 
-    @PATCH("users/{username}/")
-    fun update(@Header("Authorization") token: String, @Path("username") username: String, @Body user: User): Call<User>
+    @PATCH("users/me")
+    fun update(@Header("Authorization") token: String, @Body user: User): Call<User>
 
     @Multipart
     @PATCH("users/{username}/profile/")

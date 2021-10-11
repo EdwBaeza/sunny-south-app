@@ -14,17 +14,8 @@
         <item name="navigationViewStyle">@style/Widget.Design.NavigationView</item>
     </style>
 
-    <style name="BtnLogin" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/colorPrimaryDark</item>
-        <item name="colorButtonNormal">@color/colorWhite</item>
-    </style>
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="nav_header">
-        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorPrimary</item>
-        <item name="android:textColor">@color/colorWhite</item>
-    </style>
 </resources>

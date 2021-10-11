@@ -1,7 +1,6 @@
 package com.sunnysouth.repository.models
 
 import com.google.gson.annotations.SerializedName
-
 class CategoryPage {
     @SerializedName("count")
     var count: Int = 0
@@ -13,5 +12,5 @@ class CategoryPage {
     var previous: String = ""
 
     @SerializedName("results")
-    var categories: List<Category> = ArrayList<Category>()
+    var categories: List<Category> = ArrayList()
 }

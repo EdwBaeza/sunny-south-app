@@ -7,6 +7,7 @@ import com.sunnysouth.config.BASE_URL
 import com.sunnysouth.repository.models.User
 import com.sunnysouth.repository.rest.RetrofitClient
 import com.sunnysouth.viewmodel.UserProfileViewModel
+import kotlinx.coroutines.withTimeout
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,7 +20,7 @@ class UserRepository(private val viewModel: UserProfileViewModel){
         val retrofit = RetrofitClient().getClient(BASE_URL)
         val service = retrofit?.create<UserService>(UserService::class.java)
 
-        service?.findByUsername(token,username)?.enqueue(object: Callback<User> {
+        service?.findByUsername(token, username)?.enqueue(object: Callback<User> {
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 viewModel.setUserError(context.getString(R.string.error_in_ready_user))
@@ -66,12 +67,11 @@ class UserRepository(private val viewModel: UserProfileViewModel){
         })
     }
 
-    fun update(token: String, username: String, user: User, context: Context) {
+    fun update(token: String, user: User, context: Context) {
 
         val retrofit = RetrofitClient().getClient(BASE_URL)
         val service = retrofit?.create<UserService>(UserService::class.java)
-
-        service?.update(token, username, user)?.enqueue(object : Callback<User> {
+        service?.update(token, user)?.enqueue(object : Callback<User> {
             override fun onFailure(call: Call<User>, t: Throwable) {
                 viewModel.setUserError(context.getString(R.string.error_in_update_user))
             }

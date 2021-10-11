@@ -12,5 +12,5 @@ interface CategoryService {
     fun uploadPicture(@Header("Authorization") token: String, @Path("id") id: Int, @Part picture: MultipartBody.Part): Call<Category>
 
     @GET("categories/")
-    fun getTopCategories(@Header("Authorization") token: String): Call<CategoryPage>
+    fun getTopCategories(): Call<CategoryPage>
 }
